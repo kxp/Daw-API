@@ -1,12 +1,14 @@
 package pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts
 
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Project
+
 interface IProjectDataAccess {
 
-    fun CreateProject(var Project proj)
+    fun CreateProject(proj :Project)
 
-    fun ChangeProject(var Project proj)
+    fun ChangeProject(proj: Project)
 
-    fun DeleteProject(var id: Int)
+    fun DeleteProject( id: Int)
 
-    fun GetProjects(): List<Projects>
+    fun GetProjects(): List<Project>
 }
