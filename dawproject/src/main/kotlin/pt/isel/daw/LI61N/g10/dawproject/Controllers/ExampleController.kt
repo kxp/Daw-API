@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 
 // A container for handlers TODO: DELETE THIS!
 @RestController
-@RequestMapping("/example")
+@RequestMapping("/v1/project/")
 class ExampleController {
 
     // An handler is a method
