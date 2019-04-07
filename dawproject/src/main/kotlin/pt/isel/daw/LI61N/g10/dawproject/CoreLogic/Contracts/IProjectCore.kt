@@ -11,8 +11,8 @@ interface IProjectCore {
 
     fun ChangeProject(authIM : AuthIM, id :Int, proj: ProjectIM) : ReturningData<ProjectOM>
 
-    fun DeleteProject(authIM : AuthIM, id: Int)
+    fun DeleteProject(authIM : AuthIM, id: Int) : ReturningData<ProjectOM>
 
-    fun GetProjects(authIM : AuthIM): ReturningData<Iterable<ProjectOM>>
+    fun GetProjects(authIM : AuthIM): ReturningData<Collection<ProjectOM>>
 
 }

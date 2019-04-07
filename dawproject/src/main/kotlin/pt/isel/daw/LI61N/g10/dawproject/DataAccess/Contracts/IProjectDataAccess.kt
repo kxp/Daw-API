@@ -8,7 +8,7 @@ interface IProjectDataAccess {
 
     fun createProject(pet: Project): Int
 
-    fun getProjects(): Iterable<Project>
+    fun getProjects(): Collection<Project>
 
     fun deleteProject(id: Int?)
 }

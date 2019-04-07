@@ -10,7 +10,7 @@ interface IIssuesCore {
 
     fun ChangeIssue(authIM : AuthIM, projectID :Int, issue: IssueIM) : ReturningData<IssueOM>
 
-    fun DeleteIssue(authIM : AuthIM, projectID :Int, id: Int)
+    fun DeleteIssue(authIM : AuthIM, projectID :Int, id: Int) : ReturningData<IssueOM>
 
-    fun GetIssues(authIM : AuthIM, projectID :Int): ReturningData<Iterable<IssueOM>>
+    fun GetIssues(authIM : AuthIM, projectID :Int): ReturningData<Collection<IssueOM>>
 }
