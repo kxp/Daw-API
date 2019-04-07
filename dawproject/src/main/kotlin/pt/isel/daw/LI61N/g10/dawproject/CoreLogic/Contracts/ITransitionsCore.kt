@@ -10,5 +10,5 @@ interface ITransitionsCore {
 
     fun DeleteTransition(authIM : AuthIM, id: Int)
 
-    fun Getransitions(authIM : AuthIM): List<TransitionsIM>
+    fun Getransitions(authIM : AuthIM): Iterable<TransitionsIM>
 }

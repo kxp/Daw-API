@@ -10,5 +10,5 @@ interface ICommentsCore {
 
     fun DeleteComment(authIM : AuthIM, id: Int)
 
-    fun GetComments(authIM : AuthIM): List<CommentsIM>
+    fun GetComments(authIM : AuthIM): Iterable<CommentsIM>
 }

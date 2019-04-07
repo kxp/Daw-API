@@ -11,6 +11,6 @@ interface IProjectCore {
 
     fun DeleteProject(authIM : AuthIM, id: Int)
 
-    fun GetProjects(authIM : AuthIM): List<ProjectIM>
+    fun GetProjects(authIM : AuthIM): Iterable<ProjectIM>
 
 }

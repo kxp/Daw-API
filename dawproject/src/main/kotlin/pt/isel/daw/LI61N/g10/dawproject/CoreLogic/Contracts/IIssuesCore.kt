@@ -10,5 +10,5 @@ interface IIssuesCore {
 
     fun DeleteIssue(authIM : AuthIM, projectID :Int, id: Int)
 
-    fun GetIssues(authIM : AuthIM, projectID :Int): List<IssueIM>
+    fun GetIssues(authIM : AuthIM, projectID :Int): Iterable<IssueIM>
 }

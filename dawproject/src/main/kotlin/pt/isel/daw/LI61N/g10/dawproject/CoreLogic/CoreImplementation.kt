@@ -15,7 +15,7 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
 
     /* Labels part*/
 
-    override fun GetLabels(authIM: AuthIM, projectID: Int): List<LabelsIM> {
+    override fun GetLabels(authIM: AuthIM, projectID: Int): Iterable<LabelsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -29,7 +29,7 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetStates(authIM: AuthIM, projectID: Int): List<StatesIM> {
+    override fun GetStates(authIM: AuthIM, projectID: Int): Iterable<StatesIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -47,7 +47,7 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun Getransitions(authIM: AuthIM): List<TransitionsIM> {
+    override fun Getransitions(authIM: AuthIM): Iterable<TransitionsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -60,7 +60,11 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetProjects(authIM: AuthIM): List<ProjectIM> {
+    override fun GetProjects(authIM: AuthIM): Iterable<ProjectIM> {
+        var stuf = projectRepository!!.getProjects()
+
+
+        //return  stuf
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -86,7 +90,7 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetIssues(authIM: AuthIM, projectID: Int): List<IssueIM> {
+    override fun GetIssues(authIM: AuthIM, projectID: Int): Iterable<IssueIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -100,7 +104,7 @@ class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetComments(authIM: AuthIM): List<CommentsIM> {
+    override fun GetComments(authIM: AuthIM): Iterable<CommentsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

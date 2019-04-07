@@ -6,5 +6,5 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelsIM
 interface ILabelsCore {
     fun ChangeLabels(authIM : AuthIM, projectID :Int, labelsIM :LabelsIM)
 
-    fun GetLabels(authIM : AuthIM, projectID :Int): List<LabelsIM>
+    fun GetLabels(authIM : AuthIM, projectID :Int): Iterable<LabelsIM>
 }
