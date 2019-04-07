@@ -30,7 +30,7 @@ class TransitionRepository: ITransitionDataAccess {
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun getProjectStateTransitions(project_id: Int?): Iterable<Transition>? {
+    override fun getProjectStateTransitions(project_id: Int?): Collection<Transition>? {
         try {
             val paramSource = MapSqlParameterSource("project_id", project_id)
             return jdbcTemplate!!.query(SQL_FIND_BY_PROJECT_ID, paramSource, ROW_MAPPER)

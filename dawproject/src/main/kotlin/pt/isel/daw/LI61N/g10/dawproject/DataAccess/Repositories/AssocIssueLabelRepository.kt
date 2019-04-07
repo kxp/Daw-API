@@ -29,7 +29,7 @@ class AssocIssueLabelRepository: IAssocIssueLabelDataAccess {
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun getIssueLabels(issue_number: Int?): Iterable<AssocIssueLabel>? {
+    override fun getIssueLabels(issue_number: Int?): Collection<AssocIssueLabel>? {
         try {
             val paramSource = MapSqlParameterSource("issue_number", issue_number)
             return jdbcTemplate!!.query(SQL_FIND_BY_ISSUE_NUMBER, paramSource, ROW_MAPPER)

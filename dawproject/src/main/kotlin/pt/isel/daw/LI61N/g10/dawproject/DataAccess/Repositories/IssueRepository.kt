@@ -46,7 +46,7 @@ class IssueRepository: IIssueDataAccess {
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun getProjectIssues(project_id: Int?): Iterable<Issue>? {
+    override fun getProjectIssues(project_id: Int?): Collection<Issue>? {
         try {
             val paramSource = MapSqlParameterSource("project_id", project_id)
             return jdbcTemplate!!.query(SQL_FIND_BY_PROJECT_ID, paramSource, ROW_MAPPER)

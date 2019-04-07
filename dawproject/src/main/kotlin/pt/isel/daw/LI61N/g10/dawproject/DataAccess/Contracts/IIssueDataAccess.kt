@@ -8,7 +8,7 @@ interface IIssueDataAccess {
 
     fun createProjectIssue(pet: Issue): Int
 
-    fun getProjectIssues(project_id: Int?): Iterable<Issue>?
+    fun getProjectIssues(project_id: Int?): Collection<Issue>?
 
     fun deleteIssue(id: Int?)
 }

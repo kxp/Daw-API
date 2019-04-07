@@ -41,7 +41,7 @@ class ProjectRepository: IProjectDataAccess {
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun getProjects(): Iterable<Project> {
+    override fun getProjects(): Collection<Project> {
         return jdbcTemplate!!.query(SQL_FIND_ALL, ROW_MAPPER)
     }
 
