@@ -4,9 +4,9 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.State
 
 public interface IProjectStatesDataAccess {
 
-    fun getProjectStates(id: Int?): Iterable<State>?
+    fun getProjectStates(id: Int?): Collection<State>?
 
     fun deleteProjectStates(id: Int?)
 
-    fun createProjectStates(states: Iterable<State>?)
+    fun createProjectStates(states: Collection<State>?)
 }

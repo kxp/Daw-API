@@ -8,5 +8,5 @@ data class Issue (
         var short_desc : String,
         var creation_date : Date,
         var close_date : Date,
-        val state_id : String,
+        val state_id : Int,
         val project_id: Int)

@@ -23,7 +23,7 @@ class StateRepository: IProjectStatesDataAccess {
     @Autowired
     var jdbcTemplate: NamedParameterJdbcTemplate? = null
 
-    override fun getProjectStates(id: Int?): Iterable<State>? {
+    override fun getProjectStates(id: Int?): Collection<State>? {
         try {
             val paramSource = MapSqlParameterSource("project_id", id)
             return jdbcTemplate!!.query(SQL_FIND_BY_ID, paramSource, ROW_MAPPER)
@@ -37,12 +37,15 @@ class StateRepository: IProjectStatesDataAccess {
         jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 
-    override fun createProjectStates(states: Iterable<State>?) {
-        val arrayParamSource = Array<MapSqlParameterSource>((states as Collection<MapSqlParameterSource>).size, { position ->
-            MapSqlParameterSource()
+    override fun createProjectStates(states: Collection<State>?) {
+/*
+        val arrayParamSource = Array<MapSqlParameterSource>((states as Collection<MapSqlParameterSource>).size,{
+            position -> MapSqlParameterSource()
                 .addValue("name", states.elementAt(position).name)
                 .addValue("project_id", states.elementAt(position).project_id) })
 
         jdbcTemplate!!.batchUpdate(SQL_INSERT, arrayParamSource as Array<MapSqlParameterSource>)
+        */
+
     }
 }

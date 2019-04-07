@@ -10,7 +10,7 @@ interface ITransitionsCore {
 
     fun ChangeTransition(authIM : AuthIM, proj: TransitionsIM) : ReturningData<TransitionsOM>
 
-    fun DeleteTransition(authIM : AuthIM, id: Int)
+    fun DeleteTransition(authIM : AuthIM, id: Int) : ReturningData<TransitionsOM>
 
-    fun Getransitions(authIM : AuthIM): ReturningData<Iterable<TransitionsOM>>
+    fun Getransitions(authIM : AuthIM): ReturningData<Collection<TransitionsOM>>
 }
