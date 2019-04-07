@@ -1,5 +1,6 @@
 package pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models
 
-data class Project (internal val Id : Int, internal var Description : String)
+data class Project (val id : Int, var name :String, var short_desc : String, val user_id: Int)
+
 
 

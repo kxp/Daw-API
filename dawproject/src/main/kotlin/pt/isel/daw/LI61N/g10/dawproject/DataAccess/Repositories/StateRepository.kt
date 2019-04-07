@@ -1,0 +1,48 @@
+package pt.isel.daw.LI61N.g10.dawproject.DataAccess.Repositories
+
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.EmptyResultDataAccessException
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
+import org.springframework.stereotype.Repository
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectStatesDataAccess
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.State
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.StateRM
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils
+
+
+@Repository
+class StateRepository: IProjectStatesDataAccess {
+
+    private val SQL_FIND_BY_ID = "SELECT * FROM [dbo].[States] WHERE project_id = :project_id"
+    private val SQL_INSERT = "INSERT INTO [dbo].[States] ([name], [project_id]) values(:name, :project_id)"
+    private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[States] WHERE [project_id] = :project_id"
+
+    private val ROW_MAPPER = StateRM()
+
+    @Autowired
+    var jdbcTemplate: NamedParameterJdbcTemplate? = null
+
+    override fun getProjectStates(id: Int?): Iterable<State>? {
+        try {
+            val paramSource = MapSqlParameterSource("project_id", id)
+            return jdbcTemplate!!.query(SQL_FIND_BY_ID, paramSource, ROW_MAPPER)
+        } catch (ex: EmptyResultDataAccessException) {
+            return null
+        }
+    }
+
+    override fun deleteProjectStates(id: Int?) {
+        val paramSource = MapSqlParameterSource("project_id", id)
+        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+    }
+
+    override fun createProjectStates(states: Iterable<State>?) {
+        val arrayParamSource = Array<MapSqlParameterSource>((states as Collection<MapSqlParameterSource>).size, { position ->
+            MapSqlParameterSource()
+                .addValue("name", states.elementAt(position).name)
+                .addValue("project_id", states.elementAt(position).project_id) })
+
+        jdbcTemplate!!.batchUpdate(SQL_INSERT, arrayParamSource as Array<MapSqlParameterSource>)
+    }
+}
