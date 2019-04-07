@@ -45,7 +45,7 @@ class StateRepository: IProjectStatesDataAccess {
                     .addValue("project_id", states_list.elementAt(position).project_id) })
 
         jdbcTemplate!!.batchUpdate(SQL_INSERT, arrayParamSource as Array<MapSqlParameterSource>)
-        */
+
 
     }
 }
