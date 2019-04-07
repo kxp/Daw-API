@@ -1,4 +1,5 @@
 package pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels
 
-class AuthIM {
-}
+
+data class AuthIM (var authMethod : String,
+                   var encodedText :String)
