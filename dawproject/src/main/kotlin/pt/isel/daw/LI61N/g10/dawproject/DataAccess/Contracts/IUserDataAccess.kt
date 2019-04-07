@@ -8,5 +8,5 @@ interface IUserDataAccess {
 
     fun createUser(user: User): Int
 
-    fun deleteIssue(id: Int?)
+    fun deleteUser(id: Int?)
 }
