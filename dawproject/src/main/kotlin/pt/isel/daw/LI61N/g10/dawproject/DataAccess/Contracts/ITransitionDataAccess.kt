@@ -6,7 +6,7 @@ interface ITransitionDataAccess {
 
     fun createTransition(transition: Transition): Int
 
-    fun getProjectStateTransitions(project_id: Int?): Iterable<Transition>?
+    fun getProjectStateTransitions(project_id: Int?): Collection<Transition>?
 
     fun deleteTransition(transition: Transition)
 }

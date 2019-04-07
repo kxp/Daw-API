@@ -21,7 +21,7 @@ class LabelRepository: ILabelDataAccess {
     @Autowired
     var jdbcTemplate: NamedParameterJdbcTemplate? = null
 
-    override fun getLabels(): Iterable<Label>? {
+    override fun getLabels(): Collection<Label>? {
         try {
             return jdbcTemplate!!.query(SQL_FIND_ALL, ROW_MAPPER)
         } catch (ex: EmptyResultDataAccessException) {

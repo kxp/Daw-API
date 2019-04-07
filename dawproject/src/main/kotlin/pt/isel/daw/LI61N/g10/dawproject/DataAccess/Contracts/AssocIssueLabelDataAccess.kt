@@ -6,7 +6,7 @@ interface IAssocIssueLabelDataAccess {
 
     fun AddLabelToIssue(assocIssueLabel: AssocIssueLabel): Int
 
-    fun getIssueLabels(issue_number: Int?): Iterable<AssocIssueLabel>?
+    fun getIssueLabels(issue_number: Int?): Collection<AssocIssueLabel>?
 
     fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel)
 }
