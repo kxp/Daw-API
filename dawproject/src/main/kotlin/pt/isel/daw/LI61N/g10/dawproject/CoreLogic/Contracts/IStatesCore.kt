@@ -1,10 +1,10 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.States
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StatesIM
 
 interface IStatesCore {
-    fun ChangeStates(auth : Auth, projectID :Int, labels :States)
+    fun ChangeStates(authIM : AuthIM, projectID :Int, labels :StatesIM)
 
-    fun GetStates(auth : Auth, projectID :Int): List<States>
+    fun GetStates(authIM : AuthIM, projectID :Int): List<StatesIM>
 }

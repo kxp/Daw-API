@@ -1,16 +1,16 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Project
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectIM
 
 interface IProjectCore {
 
-    fun CreateProject(auth : Auth, proj :Project)
+    fun CreateProject(authIM : AuthIM, proj :ProjectIM)
 
-    fun ChangeProject(auth : Auth, id :Int, proj: Project)
+    fun ChangeProject(authIM : AuthIM, id :Int, proj: ProjectIM)
 
-    fun DeleteProject(auth : Auth, id: Int)
+    fun DeleteProject(authIM : AuthIM, id: Int)
 
-    fun GetProjects(auth : Auth): List<Project>
+    fun GetProjects(authIM : AuthIM): List<ProjectIM>
 
 }

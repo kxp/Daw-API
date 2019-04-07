@@ -1,10 +1,10 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Labels
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelsIM
 
 interface ILabelsCore {
-    fun ChangeLabels(auth : Auth, projectID :Int, labels :Labels)
+    fun ChangeLabels(authIM : AuthIM, projectID :Int, labelsIM :LabelsIM)
 
-    fun GetLabels(auth : Auth, projectID :Int): List<Labels>
+    fun GetLabels(authIM : AuthIM, projectID :Int): List<LabelsIM>
 }

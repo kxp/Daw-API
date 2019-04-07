@@ -1,14 +1,14 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Comments
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentsIM
 
 interface ICommentsCore {
-    fun CreateComment(auth : Auth, proj :Comments)
+    fun CreateComment(authIM : AuthIM, proj :CommentsIM)
 
-    fun ChangeComment(auth : Auth, proj: Comments)
+    fun ChangeComment(authIM : AuthIM, proj: CommentsIM)
 
-    fun DeleteComment(auth : Auth, id: Int)
+    fun DeleteComment(authIM : AuthIM, id: Int)
 
-    fun GetComments(auth : Auth): List<Comments>
+    fun GetComments(authIM : AuthIM): List<CommentsIM>
 }

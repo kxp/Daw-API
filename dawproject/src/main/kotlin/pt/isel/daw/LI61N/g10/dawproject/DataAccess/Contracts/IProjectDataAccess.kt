@@ -4,11 +4,11 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Project
 
 interface IProjectDataAccess {
 
-    fun CreateProject(proj :Project)
+    fun getProject(id: Int?): Project?
 
-    fun ChangeProject(proj: Project)
+    fun createProject(pet: Project): Int
 
-    fun DeleteProject( id: Int)
+    fun getProjects(): Iterable<Project>
 
-    fun GetProjects(): List<Project>
+    fun deleteProject(id: Int?)
 }

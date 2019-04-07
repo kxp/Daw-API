@@ -1,14 +1,14 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Transitions
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.TransitionsIM
 
 interface ITransitionsCore {
-    fun CreateTransition(auth : Auth, proj : Transitions)
+    fun CreateTransition(authIM : AuthIM, proj : TransitionsIM)
 
-    fun ChangeTransition(auth : Auth, proj: Transitions)
+    fun ChangeTransition(authIM : AuthIM, proj: TransitionsIM)
 
-    fun DeleteTransition(auth : Auth, id: Int)
+    fun DeleteTransition(authIM : AuthIM, id: Int)
 
-    fun Getransitions(auth : Auth): List<Transitions>
+    fun Getransitions(authIM : AuthIM): List<TransitionsIM>
 }

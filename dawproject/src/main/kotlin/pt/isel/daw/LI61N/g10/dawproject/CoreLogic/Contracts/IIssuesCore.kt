@@ -1,14 +1,14 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Auth
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Issue
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.IssueIM
 
 interface IIssuesCore {
-    fun CreateIssue(auth : Auth, projectID :Int, issue :Issue)
+    fun CreateIssue(authIM : AuthIM, projectID :Int, issue :IssueIM)
 
-    fun ChangeIssue(auth : Auth, projectID :Int, issue: Issue)
+    fun ChangeIssue(authIM : AuthIM, projectID :Int, issue: IssueIM)
 
-    fun DeleteIssue(auth : Auth, projectID :Int, id: Int)
+    fun DeleteIssue(authIM : AuthIM, projectID :Int, id: Int)
 
-    fun GetIssues(auth : Auth, projectID :Int): List<Issue>
+    fun GetIssues(authIM : AuthIM, projectID :Int): List<IssueIM>
 }

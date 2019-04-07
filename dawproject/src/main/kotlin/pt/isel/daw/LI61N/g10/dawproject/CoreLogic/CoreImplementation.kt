@@ -4,83 +4,83 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.*
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.*
 
 class CoreImplementation : ICommentsCore, IIssuesCore, ILabelsCore, IStatesCore, ITransitionsCore, IProjectCore {
-    override fun GetLabels(auth: Auth, projectID: Int): List<Labels> {
+    override fun GetLabels(authIM: AuthIM, projectID: Int): List<LabelsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeStates(auth: Auth, projectID: Int, labels: States) {
+    override fun ChangeStates(authIM: AuthIM, projectID: Int, labels: StatesIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetStates(auth: Auth, projectID: Int): List<States> {
+    override fun GetStates(authIM: AuthIM, projectID: Int): List<StatesIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeLabels(auth: Auth, projectID: Int, labels: Labels) {
+    override fun ChangeLabels(authIM: AuthIM, projectID: Int, labelsIM: LabelsIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun CreateTransition(auth: Auth, proj: Transitions) {
+    override fun CreateTransition(authIM: AuthIM, proj: TransitionsIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeTransition(auth: Auth, proj: Transitions) {
+    override fun ChangeTransition(authIM: AuthIM, proj: TransitionsIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteTransition(auth: Auth, id: Int) {
+    override fun DeleteTransition(authIM: AuthIM, id: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun Getransitions(auth: Auth): List<Transitions> {
+    override fun Getransitions(authIM: AuthIM): List<TransitionsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteProject(auth: Auth, id: Int) {
+    override fun DeleteProject(authIM: AuthIM, id: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetProjects(auth: Auth): List<Project> {
+    override fun GetProjects(authIM: AuthIM): List<ProjectIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeComment(auth: Auth, proj: Comments) {
+    override fun ChangeComment(authIM: AuthIM, proj: CommentsIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteComment(auth: Auth, id: Int) {
+    override fun DeleteComment(authIM: AuthIM, id: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetComments(auth: Auth): List<Comments> {
+    override fun GetComments(authIM: AuthIM): List<CommentsIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun CreateIssue(auth: Auth, projectID: Int, issue: Issue) {
+    override fun CreateIssue(authIM: AuthIM, projectID: Int, issue: IssueIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeIssue(auth: Auth, projectID: Int, issue: Issue) {
+    override fun ChangeIssue(authIM: AuthIM, projectID: Int, issue: IssueIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteIssue(auth: Auth, projectID: Int, id: Int) {
+    override fun DeleteIssue(authIM: AuthIM, projectID: Int, id: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun GetIssues(auth: Auth, projectID: Int): List<Issue> {
+    override fun GetIssues(authIM: AuthIM, projectID: Int): List<IssueIM> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun CreateProject(auth: Auth, proj: Project) {
+    override fun CreateProject(authIM: AuthIM, proj: ProjectIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeProject(auth: Auth, id: Int, proj: Project) {
+    override fun ChangeProject(authIM: AuthIM, id: Int, proj: ProjectIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun CreateComment(auth: Auth, proj: Comments) {
+    override fun CreateComment(authIM: AuthIM, proj: CommentsIM) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
