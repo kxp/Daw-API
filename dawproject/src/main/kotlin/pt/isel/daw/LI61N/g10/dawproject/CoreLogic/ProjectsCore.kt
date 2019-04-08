@@ -2,12 +2,9 @@ package pt.isel.daw.LI61N.g10.dawproject.CoreLogic
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelsOM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IProjectCore
-import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.UserValidation.Companion.Validate
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData

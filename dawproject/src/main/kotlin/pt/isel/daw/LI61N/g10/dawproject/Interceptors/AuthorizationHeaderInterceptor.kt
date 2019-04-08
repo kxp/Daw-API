@@ -2,8 +2,8 @@ package pt.isel.daw.LI61N.g10.dawproject.Interceptors
 
 import org.apache.tomcat.util.codec.binary.Base64
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.servlet.HandlerInterceptor
-import org.springframework.web.servlet.ModelAndView
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IUsersCore
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 import javax.servlet.http.HttpServletRequest
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 
 class AuthorizationHeaderInterceptor : HandlerInterceptor {
 
-    private val HEADER_AUTHORIZATION = "WWW-Authenticate"
+    private val HEADER_AUTHORIZATION = "Authorization"
 
     @Autowired
     private val userLogic: IUsersCore? = null
@@ -27,6 +27,8 @@ class AuthorizationHeaderInterceptor : HandlerInterceptor {
                 val user = userLogic!!.getUser(String(usernameBytes))
                 return user.Data != null && user.MessageCode == MessageCode.Ok
             }
+            response.reset();
+            response.sendError(HttpStatus.UNAUTHORIZED.value());
             return false
     }
 }

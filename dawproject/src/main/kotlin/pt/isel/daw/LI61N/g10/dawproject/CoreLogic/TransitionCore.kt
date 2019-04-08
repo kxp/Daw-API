@@ -2,12 +2,9 @@ package pt.isel.daw.LI61N.g10.dawproject.CoreLogic
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.IssueOM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.TransitionsIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.TransitionsOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.ITransitionsCore
-import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.UserValidation.Companion.Validate
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IAssocIssueLabelDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.ITransitionDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Transition
@@ -25,14 +22,9 @@ class TransitionCore : ITransitionsCore {
     private val assocIssueTransRepository: IAssocIssueLabelDataAccess? = null
 
 
-    override fun CreateTransition(auth: AuthIM, proj: TransitionsIM): ReturningData<TransitionsOM> {
+    override fun CreateTransition(proj: TransitionsIM): ReturningData<TransitionsOM> {
 
 
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<TransitionsOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
 
         //Validate the ids
 
@@ -43,40 +35,24 @@ class TransitionCore : ITransitionsCore {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeTransition(auth: AuthIM, proj: TransitionsIM): ReturningData<TransitionsOM> {
-
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<TransitionsOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
+    override fun ChangeTransition(proj: TransitionsIM): ReturningData<TransitionsOM> {
 
 
 
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteTransition(auth: AuthIM, id: Int) : ReturningData<TransitionsOM> {
+    override fun DeleteTransition(id: Int) : ReturningData<TransitionsOM> {
 
 
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<TransitionsOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
 
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         //transitionRepository!!.deleteTransition()
         return ReturningData<TransitionsOM>(MessageCode.Ok, null)
     }
 
-    override fun Getransitions(auth: AuthIM, id: Int): ReturningData<Collection<TransitionsOM>> {
+    override fun Getransitions(id: Int): ReturningData<Collection<TransitionsOM>> {
 
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<Collection<TransitionsOM>>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
 
         var transitions = transitionRepository!!.getProjectStateTransitions(id)
 
