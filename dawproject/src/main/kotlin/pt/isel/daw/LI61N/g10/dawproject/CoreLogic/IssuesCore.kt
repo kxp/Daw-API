@@ -40,11 +40,22 @@ class IssuesCore : IIssuesCore {
             return  ReturningData<IssueOM>(MessageCode.WrongProjectID, null )
         }
 
+        var requestedIssue = issueRepository!!.getProjectIssue(issue.id)
+
+        if (requestedIssue == null ){
+            return  ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
+        }
 
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun deleteIssue(projectID: Int, id: Int) : ReturningData<IssueOM> {
+
+        var requestedIssue = issueRepository!!.getProjectIssue(id)
+
+        if (requestedIssue == null ){
+            return  ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
+        }
 
        issueRepository!!.deleteIssue(id)
         return  ReturningData<IssueOM>(MessageCode.Ok, null )
