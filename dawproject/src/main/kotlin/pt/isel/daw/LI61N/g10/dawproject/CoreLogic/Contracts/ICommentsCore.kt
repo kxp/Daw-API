@@ -6,11 +6,11 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentsO
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface ICommentsCore {
-    fun CreateComment(authIM : AuthIM, proj :CommentsIM) : ReturningData<CommentsOM>
+    fun CreateComment(proj :CommentsIM) : ReturningData<CommentsOM>
 
-    fun ChangeComment(authIM : AuthIM, proj: CommentsIM) :ReturningData<CommentsOM>
+    fun ChangeComment(proj: CommentsIM) :ReturningData<CommentsOM>
 
-    fun DeleteComment(authIM : AuthIM, id: Int):ReturningData<CommentsOM>
+    fun DeleteComment(projectID : Int, issueID: Int, id: Int):ReturningData<CommentsOM>
 
-    fun GetComments(authIM : AuthIM): ReturningData<Collection<CommentsOM>>
+    fun GetComments(id :Int): ReturningData<Collection<CommentsOM>>
 }

@@ -7,12 +7,13 @@ import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface IProjectCore {
 
-    fun CreateProject(authIM : AuthIM, proj :ProjectIM) : ReturningData<ProjectOM>
+    fun createProject(proj :ProjectIM) : ReturningData<ProjectOM>
 
-    fun ChangeProject(authIM : AuthIM, id :Int, proj: ProjectIM) : ReturningData<ProjectOM>
+    fun changeProject(id :Int, proj: ProjectIM) : ReturningData<ProjectOM>
 
-    fun DeleteProject(authIM : AuthIM, id: Int) : ReturningData<ProjectOM>
+    fun deleteProject(id: Int) : ReturningData<ProjectOM>
 
-    fun GetProjects(authIM : AuthIM): ReturningData<Collection<ProjectOM>>
+    fun getProjects(): ReturningData<Collection<ProjectOM>>
 
+    fun getProject(id: Int): ReturningData<ProjectOM>
 }

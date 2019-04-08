@@ -6,10 +6,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IIssueDataAccess
-import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Issue
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.IssueRM
-import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.ProjectRM
 
 @Repository
 class IssueRepository: IIssueDataAccess {
@@ -46,7 +44,7 @@ class IssueRepository: IIssueDataAccess {
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun getProjectIssues(project_id: Int?): Iterable<Issue>? {
+    override fun getProjectIssues(project_id: Int?): Collection<Issue>? {
         try {
             val paramSource = MapSqlParameterSource("project_id", project_id)
             return jdbcTemplate!!.query(SQL_FIND_BY_PROJECT_ID, paramSource, ROW_MAPPER)

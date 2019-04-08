@@ -1,12 +1,13 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StatesIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StatesOM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StateIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StateOM
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface IStatesCore {
-    fun ChangeStates(authIM : AuthIM, projectID :Int, labels :StatesIM) : ReturningData<Collection<StatesOM>>
+    fun ChangeProjectStates(states: Collection<StateIM>)
 
-    fun GetStates(authIM : AuthIM, projectID :Int): ReturningData<Collection<StatesOM>>
+    fun getProjectStates(project_id: Int): ReturningData<Collection<StateOM>>?
+
+    fun deleteProjectStates(project_id: Int)
 }
