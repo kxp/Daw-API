@@ -6,6 +6,7 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IProjectCore
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectDataAccess
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Project
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
@@ -17,8 +18,8 @@ class ProjectsCore : IProjectCore{
 
 
     override fun createProject(proj: ProjectIM): ReturningData<ProjectOM> {
-        //projectRepository!!.createProject()
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc, proj.user_id))
+        return ReturningData<ProjectOM>(MessageCode.Ok, null )
     }
 
     override fun changeProject(id: Int, proj: ProjectIM): ReturningData<ProjectOM> {
@@ -27,7 +28,6 @@ class ProjectsCore : IProjectCore{
     }
 
     override fun deleteProject(id: Int) : ReturningData<ProjectOM> {
-
         projectRepository!!.deleteProject(id)
         return ReturningData<ProjectOM>(MessageCode.Ok, null )
     }

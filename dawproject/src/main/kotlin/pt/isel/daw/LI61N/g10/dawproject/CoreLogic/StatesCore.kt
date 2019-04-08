@@ -30,13 +30,12 @@ class StatesCore :IStatesCore {
         }
 
         //filling the Output model
-        var cenas = mutableListOf<StateOM>()
+        var statesOM = mutableListOf<StateOM>()
         states.forEach{
-            cenas.add(StateOM(it.id,it.name, it.project_id ))
+            statesOM.add(StateOM(it.id,it.name, it.project_id ))
         }
 
-        var returnResult = ReturningData<Collection<StateOM>>(MessageCode.Ok, cenas)
-        return returnResult
+        return ReturningData<Collection<StateOM>>(MessageCode.Ok, statesOM)
     }
 
     override fun deleteProjectStates(project_id: Int) {

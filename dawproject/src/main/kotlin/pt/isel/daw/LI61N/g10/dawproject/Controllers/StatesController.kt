@@ -18,9 +18,9 @@ class StatesController {
     @ResponseBody
     fun updateStates(
             @PathVariable project_id: Int,
-            @RequestBody states: List<StateIM>
+            @RequestBody states: List<String>
     ) {
-        coreState!!.ChangeProjectStates(states)
+        coreState!!.ChangeProjectStates(states.map { state-> StateIM(1,state,project_id)})
         ResponseEntity.status(200)
     }
 

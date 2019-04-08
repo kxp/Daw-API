@@ -6,7 +6,7 @@ interface IProjectDataAccess {
 
     fun getProject(id: Int?): Project?
 
-    fun createProject(pet: Project): Int
+    fun createProject(project: Project): Int
 
     fun getProjects(): Collection<Project>
 

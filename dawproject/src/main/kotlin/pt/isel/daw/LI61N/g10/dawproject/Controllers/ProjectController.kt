@@ -18,7 +18,7 @@ class ProjectController {
     @ResponseBody
     fun createProject(@RequestBody project: ProjectIM): ResponseEntity<ProjectOM> {
         projectsCore!!.createProject(project)
-        return ResponseEntity.ok(ProjectOM(project.id, project.name, project.shortDesc))
+        return ResponseEntity.ok(ProjectOM(project.id, project.name, project.short_desc))
     }
 
     @GetMapping
