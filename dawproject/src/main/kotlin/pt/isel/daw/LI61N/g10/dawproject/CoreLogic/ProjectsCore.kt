@@ -15,54 +15,27 @@ import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 @Service
 class ProjectsCore : IProjectCore{
 
-
-
     @Autowired
     private val projectRepository: IProjectDataAccess? = null
 
 
-    override fun CreateProject(auth: AuthIM, proj: ProjectIM): ReturningData<ProjectOM> {
-
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<ProjectOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
+    override fun createProject(proj: ProjectIM): ReturningData<ProjectOM> {
         //projectRepository!!.createProject()
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun ChangeProject(auth: AuthIM, id: Int, proj: ProjectIM): ReturningData<ProjectOM> {
+    override fun changeProject(id: Int, proj: ProjectIM): ReturningData<ProjectOM> {
 
-
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<ProjectOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun DeleteProject(auth: AuthIM, id: Int) : ReturningData<ProjectOM> {
-
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<ProjectOM>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
+    override fun deleteProject(id: Int) : ReturningData<ProjectOM> {
 
         projectRepository!!.deleteProject(id)
         return ReturningData<ProjectOM>(MessageCode.Ok, null )
     }
 
-    override fun GetProjects(auth: AuthIM): ReturningData<Collection<ProjectOM>> {
-
-
-        if (Validate(auth) == false){
-
-            var returnResult = ReturningData<Collection<ProjectOM>>(MessageCode.InvalidCredentials, null )
-            return returnResult
-        }
+    override fun getProjects(): ReturningData<Collection<ProjectOM>> {
 
         var projs = projectRepository!!.getProjects()
 
@@ -80,5 +53,14 @@ class ProjectsCore : IProjectCore{
 
         var returnResult = ReturningData<Collection<ProjectOM>>(MessageCode.Ok, projectsList)
         return returnResult
+    }
+
+    override fun getProject(id: Int): ReturningData<ProjectOM> {
+        val project = projectRepository!!.getProject(id)
+        if(project!=null)
+        {
+            return ReturningData<ProjectOM>(MessageCode.Ok, ProjectOM(project.id, project.name, project.short_desc))
+        }
+        return ReturningData<ProjectOM>(MessageCode.ProjectNotFound, null )
     }
 }

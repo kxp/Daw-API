@@ -12,6 +12,7 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.UserRM
 @Repository
 class UserRepository: IUserDataAccess {
 
+    private val SQL_FIND_BY_USERNAME = "SELECT * FROM [dbo].[Users] WHERE USERNAME = :username"
     private val SQL_FIND_BY_ID = "SELECT * FROM [dbo].[Users] WHERE ID = :id"
     private val SQL_INSERT = "INSERT INTO [dbo].[Users] ([id], [username], [password]) values(:id, :username, :password)"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Users] WHERE [id] = :id"
@@ -42,5 +43,14 @@ class UserRepository: IUserDataAccess {
     override fun deleteUser(id: Int?) {
         val paramSource = MapSqlParameterSource("id", id)
         jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+    }
+
+    override fun getUser(username: String): User? {
+        try {
+            val paramSource = MapSqlParameterSource("username", username)
+            return jdbcTemplate!!.queryForObject(SQL_FIND_BY_USERNAME, paramSource, ROW_MAPPER)
+        } catch (ex: EmptyResultDataAccessException) {
+            return null
+        }
     }
 }

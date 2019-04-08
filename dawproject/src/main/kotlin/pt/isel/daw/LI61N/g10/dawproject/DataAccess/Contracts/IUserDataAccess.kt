@@ -1,6 +1,7 @@
 package pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts
 
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.User
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface IUserDataAccess {
 
@@ -9,4 +10,6 @@ interface IUserDataAccess {
     fun createUser(user: User): Int
 
     fun deleteUser(id: Int?)
+
+    fun getUser(username: String): User?
 }
