@@ -6,10 +6,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IIssueDataAccess
-import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Issue
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.IssueRM
-import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.ProjectRM
 
 @Repository
 class IssueRepository: IIssueDataAccess {

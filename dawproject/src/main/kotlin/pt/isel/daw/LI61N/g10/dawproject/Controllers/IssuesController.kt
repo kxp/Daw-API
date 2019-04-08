@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.IssueIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.IssueOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IIssuesCore
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.TimeConverter
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/v1/projects/{project_id}/issues/")
@@ -18,7 +21,7 @@ class IssuesController {
     @ResponseBody
     fun createIssue(@RequestBody issue: IssueIM, @PathVariable project_id: Int): ResponseEntity<IssueOM> {
         issuesCore!!.createIssue(project_id, issue)
-        return ResponseEntity.ok(IssueOM(issue.id, issue.name, issue.short_desc, issue.creationDate, issue.closeDate, issue.stateID, issue.projectID))
+        return ResponseEntity.ok(IssueOM(issue.id, issue.name, issue.short_desc, TimeConverter.convertToDateViaInstant(LocalDateTime.now()) , TimeConverter.convertToDateViaInstant(LocalDateTime.now()), issue.stateID, issue.projectID))
     }
 
     @GetMapping
