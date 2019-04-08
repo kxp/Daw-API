@@ -10,7 +10,7 @@ interface ICommentsCore {
 
     fun ChangeComment(authIM : AuthIM, proj: CommentsIM) :ReturningData<CommentsOM>
 
-    fun DeleteComment(authIM : AuthIM, id: Int):ReturningData<CommentsOM>
+    fun DeleteComment(authIM : AuthIM, projectID : Int, issueID: Int, id: Int):ReturningData<CommentsOM>
 
-    fun GetComments(authIM : AuthIM): ReturningData<Collection<CommentsOM>>
+    fun GetComments(authIM : AuthIM, id :Int): ReturningData<Collection<CommentsOM>>
 }
