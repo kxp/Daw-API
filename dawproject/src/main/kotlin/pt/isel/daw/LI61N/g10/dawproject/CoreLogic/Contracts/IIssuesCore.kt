@@ -6,11 +6,11 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.IssueOM
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface IIssuesCore {
-    fun CreateIssue(projectID :Int, issue :IssueIM) : ReturningData<IssueOM>
+    fun createIssue(issue :IssueIM) : ReturningData<IssueOM>
 
-    fun ChangeIssue(projectID :Int, issue: IssueIM) : ReturningData<IssueOM>
+    fun changeIssue(issue: IssueIM) : ReturningData<IssueOM>
 
-    fun DeleteIssue(projectID :Int, id: Int) : ReturningData<IssueOM>
+    fun deleteIssue(issue_id: Int) : ReturningData<IssueOM>
 
-    fun GetIssues(projectID :Int): ReturningData<Collection<IssueOM>>
+    fun getProjectIssues(projectID :Int): ReturningData<Collection<IssueOM>>
 }
