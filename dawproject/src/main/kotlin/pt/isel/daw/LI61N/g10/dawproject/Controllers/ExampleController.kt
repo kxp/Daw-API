@@ -2,12 +2,16 @@ package pt.isel.daw.LI61N.g10.dawproject.Controllers
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StatesOM
+import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IStatesCore
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IIssueDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IProjectStatesDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Issue
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Project
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.State
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 import java.util.*
 
 // A container for handlers TODO: DELETE THIS!
@@ -28,7 +32,7 @@ class ExampleController {
 
     @GetMapping
     @ResponseBody
-    fun getAllProjects(): Iterable<Project> {
+    fun getAllProjects(): Collection<Project> {
         return projectRepository!!.getProjects()
     }
 
@@ -51,6 +55,9 @@ class ExampleController {
     @Autowired
     private val stateRepository: IProjectStatesDataAccess? = null
 
+    @Autowired
+    private val coreState: IStatesCore? = null
+
     @PutMapping("/{project_id}/states/")
     @ResponseBody
     fun updateStates(
@@ -70,8 +77,21 @@ class ExampleController {
 
     @GetMapping("/{project_id}/states/")
     @ResponseBody
-    fun getAllProjectStates(@PathVariable project_id: Int?): Iterable<State>? {
-        return stateRepository!!.getProjectStates(project_id)
+    fun getAllProjectStates(@PathVariable project_id: Int?): Collection<StatesOM>? {
+
+        //Fix this, and change the status code
+        if (project_id == null)
+            return null
+
+        //Get header with Auth!
+        var auth = AuthIM("ola", "not foud")
+
+        var result = coreState!!.GetStates(auth,  project_id)
+        if (result.MessageCode != MessageCode.Ok ){
+            //fix this, get response and change state
+            return null
+        }
+        return  result.Data
     }
 
     /********************* ISSUES *******************/
