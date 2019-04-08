@@ -6,7 +6,7 @@ interface IIssueDataAccess {
 
     fun getProjectIssue(issue_number: Int?): Issue?
 
-    fun createProjectIssue(pet: Issue): Int
+    fun createProjectIssue(issue: Issue): Int
 
     fun getProjectIssues(project_id: Int?): Collection<Issue>?
 
