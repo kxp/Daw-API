@@ -18,7 +18,7 @@ class ProjectsCore : IProjectCore{
 
 
     override fun createProject(proj: ProjectIM): ReturningData<ProjectOM> {
-        projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc, proj.user_id))
+        projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc))
         return ReturningData<ProjectOM>(MessageCode.Ok, null )
     }
 
