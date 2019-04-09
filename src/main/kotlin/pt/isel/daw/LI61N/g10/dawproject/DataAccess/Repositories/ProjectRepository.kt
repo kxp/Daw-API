@@ -36,7 +36,7 @@ class ProjectRepository: IProjectDataAccess {
         val paramSource = MapSqlParameterSource()
                 .addValue("name", project.name)
                 .addValue("short_desc", project.short_desc)
-                .addValue("user_id", project.user_id)
+                .addValue("user_id", 1)
 
         return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }

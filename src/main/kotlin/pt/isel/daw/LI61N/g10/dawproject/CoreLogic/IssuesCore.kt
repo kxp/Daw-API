@@ -62,7 +62,23 @@ class IssuesCore : IIssuesCore {
     }
 
     override fun getProjectIssue(project_id: Int, issue_number: Int): ReturningData<IssueOM> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        var issue = issueRepository!!.getProjectIssue(issue_number)
+
+        if (issue == null )
+        {
+            var returnResult = ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
+            return returnResult
+        }
+
+        if (issue.project_id != project_id){
+            var returnResult = ReturningData<IssueOM>(MessageCode.WrongProjectID, null )
+            return returnResult
+        }
+
+        var outputIssue = IssueOM(issue.state_id ,issue.name , issue.short_desc, issue.creation_date, issue.close_date, issue.state_id, issue.project_id )
+
+        return ReturningData<IssueOM>(MessageCode.Ok, outputIssue)
     }
 
     override fun getProjectIssues(projectID: Int): ReturningData<Collection<IssueOM>> {

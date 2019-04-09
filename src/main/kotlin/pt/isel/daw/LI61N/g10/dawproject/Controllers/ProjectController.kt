@@ -18,6 +18,7 @@ class ProjectController {
     @ResponseBody
     fun createProject(@RequestBody project: ProjectIM): ResponseEntity<ProjectOM> {
         projectsCore!!.createProject(project)
+        //TODO: fix this to the actual data written in the db
         return ResponseEntity.ok(ProjectOM(project.id, project.name, project.short_desc))
     }
 

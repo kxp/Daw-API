@@ -24,6 +24,7 @@ class TransitionCore : ITransitionsCore {
 
     override fun CreateTransition(proj: TransitionsIM): ReturningData<TransitionsOM> {
 
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
 
         //Validate the ids
@@ -53,6 +54,7 @@ class TransitionCore : ITransitionsCore {
 
     override fun Getransitions(id: Int): ReturningData<Collection<TransitionsOM>> {
 
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
         var transitions = transitionRepository!!.getProjectStateTransitions(id)
 

@@ -17,10 +17,15 @@ class StatesCore :IStatesCore {
     private val stateRepository: IProjectStatesDataAccess? = null
 
     override fun ChangeProjectStates(states: Collection<StateIM>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         stateRepository!!.createProjectStates(states.map {state-> State(state.id, state.name, state.projectID) })
     }
 
     override fun getProjectStates(project_id: Int): ReturningData<Collection<StateOM>>? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+
         var states = stateRepository!!.getProjectStates(project_id)
 
         if (states == null  || states.isEmpty() == true)
@@ -39,6 +44,7 @@ class StatesCore :IStatesCore {
     }
 
     override fun deleteProjectStates(project_id: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         stateRepository!!.deleteProjectStates(project_id)
     }
 }

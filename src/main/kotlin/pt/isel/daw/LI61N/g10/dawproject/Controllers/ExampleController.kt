@@ -19,7 +19,7 @@ class ExampleController {
 
 
     /********************* ISSUES *******************/
-
+/*
     @Autowired
     private val issueRepository: IIssueDataAccess? = null
 
@@ -49,5 +49,5 @@ class ExampleController {
         issueRepository!!.deleteIssue(issue_id)
         return "Deleted " + issue_id!!
     }
-
+*/
 }

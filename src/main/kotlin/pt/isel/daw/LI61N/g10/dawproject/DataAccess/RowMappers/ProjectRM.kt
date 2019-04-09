@@ -12,8 +12,8 @@ class ProjectRM: RowMapper<Project>{
         val project = Project(
                 rs.getInt("id"),
                 rs.getString("name"),
-                rs.getString("short_desc"),
-                rs.getInt("user_id"))
+                rs.getString("short_desc"))
+                //rs.getInt("user_id"))
         return project
     }
 }
