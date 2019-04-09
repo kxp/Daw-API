@@ -24,12 +24,13 @@ Tested:
   * Post
   * Delete
   * Get single
--States:
+  
+- States:
   * Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
   * Delete all 
   * get all project states 
--Issues:
-* 
+- Issues:
+ * Not working
 
 Things that we may need:
 * https://github.com/isel-leic-daw/1819v-public/blob/master/LI61N/services/spring-demo/src/main/kotlin/pt/isel/daw/demo/ExampleHandlerExceptionResolver.kt
