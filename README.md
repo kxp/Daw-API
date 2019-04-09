@@ -1,5 +1,5 @@
 # Daw-API
-Daw server API
+Daw server API-- The documentations of the API can be found inside the folder docs.
 
 ## External API location:
 <http://51.75.163.237:8080/v1/projects>
