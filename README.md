@@ -1,5 +1,5 @@
 # Daw-API
-Daw server API
+Daw server API-- The documentations of the API can be found inside the folder docs.
 
 ## External API location:
 <http://51.75.163.237:8080/v1/projects>
@@ -20,16 +20,17 @@ Next changes:
 
 Tested:
 - Projects:
-* Get all 
-* Post
-* Delete
-* Get single
--States:
-* Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
-* Delete all 
-* get all project states 
--Issues:
-* 
+  * Get all 
+  * Post
+  * Delete
+  * Get single
+  
+- States:
+  * Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
+  * Delete all 
+  * get all project states 
+- Issues:
+  * Not working
 
 Things that we may need:
 * https://github.com/isel-leic-daw/1819v-public/blob/master/LI61N/services/spring-demo/src/main/kotlin/pt/isel/daw/demo/ExampleHandlerExceptionResolver.kt
