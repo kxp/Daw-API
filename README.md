@@ -16,6 +16,7 @@ Maven: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.htm
 Next changes: 
 * Add id and date to Comments;
 * When calling post project, we need to add something to add user_id using the get user in the authorization. That way ProjectIM doesnt need a user_id.
+* Allow to change issue.
 
 
 Tested:
