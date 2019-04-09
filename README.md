@@ -20,14 +20,14 @@ Next changes:
 
 Tested:
 - Projects:
-* Get all 
-* Post
-* Delete
-* Get single
+  * Get all 
+  * Post
+  * Delete
+  * Get single
 -States:
-* Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
-* Delete all 
-* get all project states 
+  * Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
+  * Delete all 
+  * get all project states 
 -Issues:
 * 
 
