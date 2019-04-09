@@ -30,7 +30,7 @@ Tested:
   * Delete all 
   * get all project states 
 - Issues:
- * Not working
+  * Not working
 
 Things that we may need:
 * https://github.com/isel-leic-daw/1819v-public/blob/master/LI61N/services/spring-demo/src/main/kotlin/pt/isel/daw/demo/ExampleHandlerExceptionResolver.kt
