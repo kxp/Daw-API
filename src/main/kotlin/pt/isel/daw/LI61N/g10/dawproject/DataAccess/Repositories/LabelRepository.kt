@@ -13,7 +13,8 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.RowMappers.LabelRM
 class LabelRepository: ILabelDataAccess {
 
     private val SQL_FIND_ALL = "SELECT * FROM [dbo].[Labels]"
-    private val SQL_INSERT = "INSERT INTO [dbo].[Labels] ([name]) values(:name)"
+    private val SQL_INSERT = "INSERT INTO [dbo].[Labels] ([name]) values(:name)" +
+    "select * from [dbo].[Labels] where [id] = (SELECT SCOPE_IDENTITY())"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Labels] WHERE [id] = :id"
 
     private val ROW_MAPPER = LabelRM()
@@ -34,10 +35,11 @@ class LabelRepository: ILabelDataAccess {
         jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 
-    override fun createLabel(label: Label?): Int {
+    override fun createLabel(label: Label?): Label? {
         val paramSource = MapSqlParameterSource()
                 .addValue("name", label!!.name)
 
-        return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        return jdbcTemplate!!.queryForObject(SQL_INSERT, paramSource, ROW_MAPPER)
     }
 }

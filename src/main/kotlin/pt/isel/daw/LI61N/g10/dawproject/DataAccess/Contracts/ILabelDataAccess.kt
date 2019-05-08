@@ -8,5 +8,5 @@ public interface ILabelDataAccess {
 
     fun deleteLabel(id: Int?)
 
-    fun createLabel(label: Label?): Int
+    fun createLabel(label: Label?): Label?
 }

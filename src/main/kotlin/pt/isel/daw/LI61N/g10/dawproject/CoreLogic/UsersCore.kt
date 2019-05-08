@@ -28,17 +28,15 @@ class UsersCore : IUsersCore {
         return returningData
     }
 
-    override fun createUser(user: UserIM): ReturningData<Int> {
-        var returningData : ReturningData<Int>
+    override fun createUser(user: UserIM): ReturningData<User> {
         try {
-            val rowsAffected = userRepository!!.createUser(User(user.id, user.username, user.password))
-            returningData = ReturningData<Int>(MessageCode.Ok, rowsAffected)
+            val user = userRepository!!.createUser(User(user.id, user.username, user.password))
+            return ReturningData<User>(MessageCode.Ok, user)
         }
         catch (e:Exception)
         {
-            returningData =  ReturningData<Int>(MessageCode.GenericError, 0)
+            return ReturningData<User>(MessageCode.GenericError, null)
         }
-        return returningData
     }
 
     override fun deleteUser(id: Int?) {

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.ProjectOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IProjectCore
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 
 @RestController
 @RequestMapping("/v1/projects/")
@@ -16,18 +17,21 @@ class ProjectController {
 
     @PostMapping
     @ResponseBody
-    fun createProject(@RequestBody project: ProjectIM): ResponseEntity<ProjectOM> {
-        projectsCore!!.createProject(project)
-        //TODO: fix this to the actual data written in the db
-        return ResponseEntity.ok(ProjectOM(project.id, project.name, project.short_desc))
+    fun createProject(@RequestBody project: ProjectIM): ResponseEntity<Any> {
+        var returningData = projectsCore!!.createProject(project)
+        var project_received = returningData.Data
+        if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){
+            return ResponseEntity.ok(ProjectOM(project_received!!.id, project_received!!.name, project_received!!.short_desc))
+        }
+        return ResponseEntity.status(500).body("Couldn't create the project") //todo change error message
     }
 
     @GetMapping
     @ResponseBody
     fun getAllProjects(): ResponseEntity<Collection<ProjectOM>> {
-        val projects = projectsCore!!.getProjects()
-        val projectsOM = projects.Data!!.map {prj->ProjectOM(prj.id, prj.name, prj.shortDesc)}
-        if(projectsOM.isNotEmpty()){
+        val returningData = projectsCore!!.getProjects()
+        if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){
+            val projectsOM = returningData.Data!!.map {prj->ProjectOM(prj.id, prj.name, prj.short_desc)}
             return ResponseEntity.ok(projectsOM)
         }
         return ResponseEntity.notFound().build<Collection<ProjectOM>>()
@@ -36,10 +40,13 @@ class ProjectController {
     @GetMapping("/{id}")
     @ResponseBody
     fun getProject(@PathVariable id: Int): ResponseEntity<ProjectOM> {
-        val project = projectsCore!!.getProject(id).Data
-        if(project != null)
-        {
-            return ResponseEntity.ok(project)
+        val returningData= projectsCore!!.getProject(id)
+        if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){
+            val project = returningData.Data
+            if(project != null)
+            {
+                return ResponseEntity.ok(project)
+            }
         }
         return ResponseEntity.notFound().build<ProjectOM>()
     }
@@ -47,10 +54,10 @@ class ProjectController {
     @DeleteMapping("/{id}")
     @ResponseBody
     fun deleteProject(@PathVariable id: Int): ResponseEntity<ProjectOM> {
-        val project = projectsCore!!.deleteProject(id).Data
-        if(project != null)
+        val messageCode = projectsCore!!.deleteProject(id).MessageCode
+        if(messageCode == MessageCode.Ok)
         {
-            return ResponseEntity.ok(project)
+            return ResponseEntity.ok(ProjectOM(1,"","")) // todo remove this and add success message
         }
         return ResponseEntity.notFound().build<ProjectOM>()
     }

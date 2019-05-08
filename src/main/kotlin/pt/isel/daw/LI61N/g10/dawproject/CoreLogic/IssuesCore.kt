@@ -23,9 +23,7 @@ class IssuesCore : IIssuesCore {
 
         val currentTime = LocalDateTime.now()
         var issue = Issue(-1, issue.name, issue.short_desc, TimeConverter. convertToDateViaInstant(currentTime)  , TimeConverter.convertToDateViaInstant(currentTime) , issue.stateID, projectID)
-        var addedId = issueRepository!!.createProjectIssue(issue)
-
-        var addedIssue = issueRepository!!.getProjectIssue(addedId)
+        var addedIssue = issueRepository!!.createProjectIssue(issue)
 
         if (addedIssue == null ){
             return  ReturningData<IssueOM>(MessageCode.GenericError, null )

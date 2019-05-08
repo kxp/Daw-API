@@ -14,7 +14,8 @@ class UserRepository: IUserDataAccess {
 
     private val SQL_FIND_BY_USERNAME = "SELECT * FROM [dbo].[Users] WHERE username = :username"
     private val SQL_FIND_BY_ID = "SELECT * FROM [dbo].[Users] WHERE ID = :id"
-    private val SQL_INSERT = "INSERT INTO [dbo].[Users] ([id], [username], [password]) values(:id, :username, :password)"
+    private val SQL_INSERT = "INSERT INTO [dbo].[Users] ([username], [password]) values(:username, :password);" +
+            "select * from [dbo].[Users] where [id] = (SELECT SCOPE_IDENTITY())"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Users] WHERE [id] = :id"
 
     private val ROW_MAPPER = UserRM()
@@ -31,13 +32,13 @@ class UserRepository: IUserDataAccess {
         }
     }
 
-    override fun createUser(user: User): Int {
+    override fun createUser(user: User): User? {
         val paramSource = MapSqlParameterSource()
-                .addValue("id", user.id)
                 .addValue("username", user.username)
                 .addValue("password", user.password)
 
-        return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        return jdbcTemplate!!.queryForObject(SQL_INSERT, paramSource, ROW_MAPPER)
+        //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
     override fun deleteUser(id: Int?) {

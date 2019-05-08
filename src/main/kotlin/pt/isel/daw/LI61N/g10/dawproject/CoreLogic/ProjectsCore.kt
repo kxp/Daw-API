@@ -18,8 +18,16 @@ class ProjectsCore : IProjectCore{
 
 
     override fun createProject(proj: ProjectIM): ReturningData<ProjectOM> {
-        projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc))
-        return ReturningData<ProjectOM>(MessageCode.Ok, null )
+        var project = projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc))
+
+        if(project != null){
+            System.out.println("CREATED PROJECT: ".plus(project?.id ).plus(project?.name ).plus(project?.short_desc)); //todo delete
+            return ReturningData<ProjectOM>(MessageCode.Ok, ProjectOM(project.id, project.name, project.short_desc))
+        }
+        else
+        {
+            return ReturningData<ProjectOM>(MessageCode.GenericError, null)
+        }
     }
 
     override fun changeProject(id: Int, proj: ProjectIM): ReturningData<ProjectOM> {
@@ -28,28 +36,29 @@ class ProjectsCore : IProjectCore{
     }
 
     override fun deleteProject(id: Int) : ReturningData<ProjectOM> {
-        projectRepository!!.deleteProject(id)
-        return ReturningData<ProjectOM>(MessageCode.Ok, null )
+        var deleted = projectRepository!!.deleteProject(id)
+        if(deleted > 0){
+            return ReturningData<ProjectOM>(MessageCode.Ok, null )
+        }
+        return ReturningData<ProjectOM>(MessageCode.ProjectNotFound, null)
     }
 
     override fun getProjects(): ReturningData<Collection<ProjectOM>> {
 
-        var projs = projectRepository!!.getProjects()
+        var projects = projectRepository!!.getProjects()
 
-        if (projs == null  || projs.isEmpty()== true)
+        if (projects.isEmpty())
         {
-            var returnResult = ReturningData<Collection<ProjectOM>>(MessageCode.GenericError, null )
-            return returnResult
+            return ReturningData<Collection<ProjectOM>>(MessageCode.GenericError, null )
         }
 
         //filling the Output model
         var projectsList = mutableListOf<ProjectOM>()
-        projs.forEach{
+        projects.forEach{
             projectsList.add(ProjectOM(it.id,it.name , it.short_desc ))
         }
 
-        var returnResult = ReturningData<Collection<ProjectOM>>(MessageCode.Ok, projectsList)
-        return returnResult
+        return ReturningData<Collection<ProjectOM>>(MessageCode.Ok, projectsList)
     }
 
     override fun getProject(id: Int): ReturningData<ProjectOM> {

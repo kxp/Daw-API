@@ -14,7 +14,8 @@ class CommentRepository: ICommentDataAccess {
 
     private val SQL_UPDATE = "UPDATE * FROM [dbo].[Comments] SET [short_text] = :short_text WHERE [id] = :id"
     private val SQL_FIND_ALL = "SELECT * FROM [dbo].[Comments]"
-    private val SQL_INSERT = "INSERT INTO [dbo].[Comments] ([short_text], [issue_id]) values( :short_text, :issue_id)"
+    private val SQL_INSERT = "INSERT INTO [dbo].[Comments] ([short_text], [issue_id]) values( :short_text, :issue_id)" +
+    "select * from [dbo].[Comments] where [id] = (SELECT SCOPE_IDENTITY())"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Comments] WHERE [id] = :id"
 
     private val ROW_MAPPER = CommentRM()
@@ -30,13 +31,14 @@ class CommentRepository: ICommentDataAccess {
         return jdbcTemplate!!.update(SQL_UPDATE, paramSource)
     }
 
-    override fun createComment(comment: Comment): Int {
+    override fun createComment(comment: Comment): Comment? {
         val paramSource = MapSqlParameterSource()
                 .addValue("id", comment.id)
                 .addValue("short_text", comment.short_text)
                 .addValue("issue_id", comment.issue_id)
 
-        return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        return jdbcTemplate!!.queryForObject(SQL_INSERT, paramSource, ROW_MAPPER)
     }
 
     override fun getComments(): Collection<Comment> {

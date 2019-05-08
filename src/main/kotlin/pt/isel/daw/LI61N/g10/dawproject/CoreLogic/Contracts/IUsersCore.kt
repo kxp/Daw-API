@@ -8,7 +8,7 @@ interface IUsersCore {
 
     fun getUser(user_id: Int?): ReturningData<User>
 
-    fun createUser(user: UserIM): ReturningData<Int>
+    fun createUser(user: UserIM): ReturningData<User>
 
     fun deleteUser(id: Int?)
 

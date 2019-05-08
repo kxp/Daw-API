@@ -14,7 +14,8 @@ class IssueRepository: IIssueDataAccess {
 
     private val SQL_FIND_BY_PROJECT_ID = "SELECT * FROM [dbo].[Issues] WHERE project_id = :project_id"
     private val SQL_FIND_BY_ID = "SELECT * FROM [dbo].[Issues] WHERE number = :number"
-    private val SQL_INSERT = "INSERT INTO [dbo].[Issues] ([name], [short_desc], [creation_date], [close_date], [state_id], [project_id]) values(:name, :short_desc, :creation_date, :close_date, :state_id, :project_id)"
+    private val SQL_INSERT = "INSERT INTO [dbo].[Issues] ([name], [short_desc], [creation_date], [close_date], [state_id], [project_id]) values(:name, :short_desc, :creation_date, :close_date, :state_id, :project_id)"+
+            "select * from [dbo].[Issues] where [number] = (SELECT SCOPE_IDENTITY())"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Issues] WHERE [number] = :number"
 
     private val ROW_MAPPER = IssueRM()
@@ -31,7 +32,7 @@ class IssueRepository: IIssueDataAccess {
         }
     }
 
-    override fun createProjectIssue(issue: Issue): Int {
+    override fun createProjectIssue(issue: Issue): Issue? {
         val paramSource = MapSqlParameterSource()
                 .addValue("number", issue.number)
                 .addValue("name", issue.name)
@@ -41,7 +42,8 @@ class IssueRepository: IIssueDataAccess {
                 .addValue("state_id", issue.state_id)
                 .addValue("project_id", issue.project_id)
 
-        return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        return jdbcTemplate!!.queryForObject(SQL_INSERT, paramSource, ROW_MAPPER)
     }
 
     override fun getProjectIssues(project_id: Int?): Collection<Issue>? {

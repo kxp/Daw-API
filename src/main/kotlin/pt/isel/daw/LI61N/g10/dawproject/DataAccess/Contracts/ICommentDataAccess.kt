@@ -6,7 +6,7 @@ interface ICommentDataAccess {
 
     fun updateComment(comment: Comment): Int
 
-    fun createComment(comment: Comment): Int
+    fun createComment(comment: Comment): Comment?
 
     fun getComments(): Collection<Comment>
 

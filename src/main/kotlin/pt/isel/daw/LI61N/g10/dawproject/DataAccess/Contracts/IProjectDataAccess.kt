@@ -6,9 +6,9 @@ interface IProjectDataAccess {
 
     fun getProject(id: Int?): Project?
 
-    fun createProject(project: Project): Int
+    fun createProject(project: Project): Project?
 
     fun getProjects(): Collection<Project>
 
-    fun deleteProject(id: Int?)
+    fun deleteProject(id: Int?): Int
 }
