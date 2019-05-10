@@ -53,12 +53,12 @@ class ProjectController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    fun deleteProject(@PathVariable id: Int): ResponseEntity<ProjectOM> {
+    fun deleteProject(@PathVariable id: Int): ResponseEntity<Any> {
         val messageCode = projectsCore!!.deleteProject(id).MessageCode
         if(messageCode == MessageCode.Ok)
         {
-            return ResponseEntity.ok(ProjectOM(1,"","")) // todo remove this and add success message
+            return ResponseEntity.ok().build()
         }
-        return ResponseEntity.notFound().build<ProjectOM>()
+        return ResponseEntity.notFound().build()
     }
 }

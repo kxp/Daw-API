@@ -20,16 +20,20 @@ class IssuesCore : IIssuesCore {
     private val issueRepository: IIssueDataAccess? = null
 
     override fun createIssue(projectID: Int, issue: IssueIM): ReturningData<IssueOM> {
+        var addedIssue = issueRepository!!.createProjectIssue(Issue(
+                issue.number,
+                issue.name,
+                issue.short_desc,
+                TimeConverter.convertToDateViaInstant(LocalDateTime.now()),
+                null,
+                issue.stateID,
+                projectID))
 
-        val currentTime = LocalDateTime.now()
-        var issue = Issue(-1, issue.name, issue.short_desc, TimeConverter. convertToDateViaInstant(currentTime)  , TimeConverter.convertToDateViaInstant(currentTime) , issue.stateID, projectID)
-        var addedIssue = issueRepository!!.createProjectIssue(issue)
-
-        if (addedIssue == null ){
-            return  ReturningData<IssueOM>(MessageCode.GenericError, null )
+        if (addedIssue != null ){
+            return  ReturningData<IssueOM>(MessageCode.Ok, convertIssueToIssueOM(addedIssue))
         }
 
-        return  ReturningData<IssueOM>(MessageCode.Ok, IssueOM(addedIssue.state_id, addedIssue.name, addedIssue.short_desc, addedIssue.creation_date, addedIssue.close_date, addedIssue.state_id, addedIssue.project_id ))
+        return  ReturningData<IssueOM>(MessageCode.GenericError, null )
     }
 
     override fun changeIssue(projectID: Int, issue: IssueIM): ReturningData<IssueOM> {
@@ -38,7 +42,7 @@ class IssuesCore : IIssuesCore {
             return  ReturningData<IssueOM>(MessageCode.WrongProjectID, null )
         }
 
-        var requestedIssue = issueRepository!!.getProjectIssue(issue.id)
+        var requestedIssue = issueRepository!!.getProjectIssue(issue.number)
 
         if (requestedIssue == null ){
             return  ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
@@ -60,47 +64,35 @@ class IssuesCore : IIssuesCore {
     }
 
     override fun getProjectIssue(project_id: Int, issue_number: Int): ReturningData<IssueOM> {
-
         var issue = issueRepository!!.getProjectIssue(issue_number)
 
         if (issue == null )
         {
-            var returnResult = ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
-            return returnResult
+            return ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
         }
-
         if (issue.project_id != project_id){
-            var returnResult = ReturningData<IssueOM>(MessageCode.WrongProjectID, null )
-            return returnResult
+            return ReturningData<IssueOM>(MessageCode.WrongProjectID, null )
         }
-
-        var outputIssue = IssueOM(issue.state_id ,issue.name , issue.short_desc, issue.creation_date, issue.close_date, issue.state_id, issue.project_id )
-
-        return ReturningData<IssueOM>(MessageCode.Ok, outputIssue)
+        return ReturningData<IssueOM>(MessageCode.Ok, convertIssueToIssueOM(issue))
     }
 
     override fun getProjectIssues(projectID: Int): ReturningData<Collection<IssueOM>> {
-
-       return getInternalIssues(projectID)
-    }
-
-
-    private fun getInternalIssues(projectID :Int) :  ReturningData<Collection<IssueOM>>{
-
         var issues = issueRepository!!.getProjectIssues(projectID)
 
-        if (issues == null  || issues.isEmpty()== true)
+        if(issues != null)
         {
-            var returnResult = ReturningData<Collection<IssueOM>>(MessageCode.GenericError, null )
-            return returnResult
+            //filling the Output model
+            var issuesList = mutableListOf<IssueOM>()
+            issues.forEach{
+                issuesList.add(convertIssueToIssueOM(it))
+            }
+            return ReturningData<Collection<IssueOM>>(MessageCode.Ok, issuesList)
         }
-        //filling the Output model
-        var issuesList = mutableListOf<IssueOM>()
-        issues.forEach{
-            issuesList.add(IssueOM(it.state_id ,it.name , it.short_desc, it.creation_date, it.close_date, it.state_id, it.project_id ))
-        }
-
-        return ReturningData<Collection<IssueOM>>(MessageCode.Ok, issuesList)
+        return ReturningData<Collection<IssueOM>>(MessageCode.GenericError, null )
     }
 
+    fun convertIssueToIssueOM(issue: Issue) : IssueOM
+    {
+        return IssueOM(issue.state_id ,issue.name , issue.short_desc, issue.creation_date, issue.close_date, issue.state_id, issue.project_id )
+    }
 }
