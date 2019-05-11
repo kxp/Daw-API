@@ -41,9 +41,9 @@ class UserRepository: IUserDataAccess {
         //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
-    override fun deleteUser(id: Int?) {
+    override fun deleteUser(id: Int?) : Int {
         val paramSource = MapSqlParameterSource("id", id)
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 
     override fun getUser(username: String): User? {

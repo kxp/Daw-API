@@ -39,12 +39,12 @@ class TransitionRepository: ITransitionDataAccess {
         }
     }
 
-    override fun deleteTransition(transition: Transition) {
+    override fun deleteTransition(transition: Transition) : Int {
         val paramSource = MapSqlParameterSource()
                 .addValue("number", transition.project_id)
                 .addValue("name", transition.initial_state_id)
                 .addValue("name", transition.target_state_id)
 
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 }

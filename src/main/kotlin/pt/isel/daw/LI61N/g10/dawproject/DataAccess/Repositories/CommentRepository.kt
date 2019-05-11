@@ -45,8 +45,8 @@ class CommentRepository: ICommentDataAccess {
         return jdbcTemplate!!.query(SQL_FIND_ALL, ROW_MAPPER)
     }
 
-    override fun deleteComment(id: Int?) {
+    override fun deleteComment(id: Int?) : Int {
         val paramSource = MapSqlParameterSource("id", id)
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 }

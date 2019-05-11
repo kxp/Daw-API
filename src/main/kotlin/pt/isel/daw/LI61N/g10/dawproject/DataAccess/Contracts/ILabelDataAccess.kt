@@ -6,7 +6,7 @@ public interface ILabelDataAccess {
 
     fun getLabels(): Collection<Label>?
 
-    fun deleteLabel(id: Int?)
+    fun deleteLabel(id: Int?): Int
 
     fun createLabel(label: Label?): Label?
 }

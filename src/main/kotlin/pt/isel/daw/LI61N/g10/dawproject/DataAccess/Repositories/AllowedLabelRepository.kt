@@ -39,12 +39,12 @@ class AllowedLabelRepository: IAllowedLabelDataAccess {
         }
     }
 
-    override fun deleteProjectAllowedLabel(allowedLabel: AllowedLabel) {
+    override fun deleteProjectAllowedLabel(allowedLabel: AllowedLabel) : Int {
         val paramSource = MapSqlParameterSource()
                 .addValue("project_id", allowedLabel.project_id)
                 .addValue("label_id", allowedLabel.label_id)
 
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 
 }

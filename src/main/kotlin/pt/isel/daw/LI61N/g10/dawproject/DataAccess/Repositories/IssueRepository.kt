@@ -55,8 +55,8 @@ class IssueRepository: IIssueDataAccess {
         }
     }
 
-    override fun deleteIssue(number: Int?) {
+    override fun deleteIssue(number: Int?) : Int {
         val paramSource = MapSqlParameterSource("number", number)
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 }

@@ -8,5 +8,5 @@ interface ITransitionDataAccess {
 
     fun getProjectStateTransitions(project_id: Int?): Collection<Transition>?
 
-    fun deleteTransition(transition: Transition)
+    fun deleteTransition(transition: Transition): Int
 }

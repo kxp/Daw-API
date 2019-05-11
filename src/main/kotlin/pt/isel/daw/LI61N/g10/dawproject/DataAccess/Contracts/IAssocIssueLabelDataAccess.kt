@@ -8,5 +8,5 @@ interface IAssocIssueLabelDataAccess {
 
     fun getIssueLabels(issue_number: Int?): Collection<AssocIssueLabel>?
 
-    fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel)
+    fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel): Int
 }

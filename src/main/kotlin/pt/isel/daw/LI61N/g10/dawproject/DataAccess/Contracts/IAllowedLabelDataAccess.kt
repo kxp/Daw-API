@@ -8,5 +8,5 @@ interface IAllowedLabelDataAccess {
 
     fun getProjectAllowedLabels(project_id: Int?): Collection<AllowedLabel>?
 
-    fun deleteProjectAllowedLabel(allowedLabel: AllowedLabel)
+    fun deleteProjectAllowedLabel(allowedLabel: AllowedLabel): Int
 }

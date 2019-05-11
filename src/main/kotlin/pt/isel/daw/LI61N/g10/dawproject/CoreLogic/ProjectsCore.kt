@@ -21,7 +21,6 @@ class ProjectsCore : IProjectCore{
         var project = projectRepository!!.createProject(Project(proj.id, proj.name, proj.short_desc))
 
         if(project != null){
-            System.out.println("CREATED PROJECT: ".plus(project?.id ).plus(project?.name ).plus(project?.short_desc)); //todo delete
             return ReturningData<ProjectOM>(MessageCode.Ok, ProjectOM(project.id, project.name, project.short_desc))
         }
         else
@@ -44,21 +43,18 @@ class ProjectsCore : IProjectCore{
     }
 
     override fun getProjects(): ReturningData<Collection<ProjectOM>> {
-
         var projects = projectRepository!!.getProjects()
 
-        if (projects.isEmpty())
+        if (projects != null)
         {
-            return ReturningData<Collection<ProjectOM>>(MessageCode.GenericError, null )
+            //filling the Output model
+            var projectsList = mutableListOf<ProjectOM>()
+            projects.forEach{
+                projectsList.add(ProjectOM(it.id,it.name , it.short_desc ))
+            }
+            return ReturningData<Collection<ProjectOM>>(MessageCode.Ok, projectsList)
         }
-
-        //filling the Output model
-        var projectsList = mutableListOf<ProjectOM>()
-        projects.forEach{
-            projectsList.add(ProjectOM(it.id,it.name , it.short_desc ))
-        }
-
-        return ReturningData<Collection<ProjectOM>>(MessageCode.Ok, projectsList)
+        return ReturningData<Collection<ProjectOM>>(MessageCode.GenericError, null )
     }
 
     override fun getProject(id: Int): ReturningData<ProjectOM> {

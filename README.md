@@ -17,19 +17,17 @@ Next changes:
 * Add id and date to Comments;
 * When calling post project, we need to add something to add user_id using the get user in the authorization. That way ProjectIM doesnt need a user_id.
 * Allow to change issue.
+* When editing or creating a resource, we should return in the response body a representation of that created resource.
+* Make every method in core return OM objects, not the normal model classes. See ProjectCore.
+* Need to be: get projects by user id
 
 
 Tested:
 - Projects:
-  * Get all 
-  * Post
-  * Delete
-  * Get single
+  * All
   
 - States:
-  * Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
-  * Delete all 
-  * get all project states 
+  * To be tested 
 - Issues:
   * Not working
 

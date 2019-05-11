@@ -10,5 +10,5 @@ interface ICommentDataAccess {
 
     fun getComments(): Collection<Comment>
 
-    fun deleteComment(id: Int?)
+    fun deleteComment(id: Int?): Int
 }

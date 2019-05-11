@@ -10,5 +10,5 @@ interface IIssueDataAccess {
 
     fun getProjectIssues(project_id: Int?): Collection<Issue>?
 
-    fun deleteIssue(id: Int?)
+    fun deleteIssue(id: Int?): Int
 }
