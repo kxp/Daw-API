@@ -3,6 +3,7 @@ package pt.isel.daw.LI61N.g10.dawproject.CoreLogic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.UserIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.OutputModels.UserOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IUsersCore
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.IUserDataAccess
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.User
@@ -15,49 +16,41 @@ class UsersCore : IUsersCore {
     @Autowired
     private val userRepository: IUserDataAccess? = null
 
-    override fun getUser(user_id: Int?): ReturningData<User> {
-        var returningData : ReturningData<User>
-        try {
-            val user = userRepository!!.getUser(user_id)
-            returningData = ReturningData<User>(MessageCode.Ok, user)
-        }
-        catch (e:Exception)
+    override fun getUser(user_id: Int?): ReturningData<UserOM> {
+        val user = userRepository!!.getUser(user_id)
+        if(user!=null)
         {
-            returningData =  ReturningData<User>(MessageCode.GenericError, null)
+            return ReturningData<UserOM>(MessageCode.Ok, UserOM(user.id, user.username))
         }
-        return returningData
+        return ReturningData<UserOM>(MessageCode.ProjectNotFound, null )
     }
 
-    override fun createUser(user: UserIM): ReturningData<User> {
-        try {
-            val user = userRepository!!.createUser(User(user.id, user.username, user.password))
-            return ReturningData<User>(MessageCode.Ok, user)
+    override fun createUser(user: UserIM): ReturningData<UserOM> {
+        var user = userRepository!!.createUser(User(user.id, user.username, user.password))
+
+        if(user != null){
+            return ReturningData<UserOM>(MessageCode.Ok, UserOM(user.id, user.username))
         }
-        catch (e:Exception)
+        else
         {
-            return ReturningData<User>(MessageCode.GenericError, null)
+            return ReturningData<UserOM>(MessageCode.GenericError, null)
         }
     }
 
-    override fun deleteUser(id: Int?) {
-        try {
-            userRepository!!.deleteUser(id)
+    override fun deleteUser(id: Int?): ReturningData<UserOM> {
+        var deleted = userRepository!!.deleteUser(id)
+        if(deleted > 0){
+            return ReturningData<UserOM>(MessageCode.Ok, null )
         }
-        catch (e:Exception)
-        {
-        }
+        return ReturningData<UserOM>(MessageCode.ProjectNotFound, null)
     }
 
-    override fun getUser(username: String): ReturningData<User> {
-        var returningData : ReturningData<User>
-        try {
-            val user = userRepository!!.getUser(username)
-            returningData = ReturningData<User>(MessageCode.Ok, user)
-        }
-        catch (e:Exception)
+    override fun getUser(username: String): ReturningData<UserOM> {
+        val user = userRepository!!.getUser(username)
+        if(user!=null)
         {
-            returningData =  ReturningData<User>(MessageCode.GenericError, null)
+            return ReturningData<UserOM>(MessageCode.Ok, UserOM(user.id, user.username))
         }
-        return returningData
+        return ReturningData<UserOM>(MessageCode.ProjectNotFound, null )
     }
 }

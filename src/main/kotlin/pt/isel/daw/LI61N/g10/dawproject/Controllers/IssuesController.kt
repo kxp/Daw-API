@@ -24,7 +24,7 @@ class IssuesController {
         var returningData =issuesCore!!.createIssue(project_id, issue)
         var issueReceived = returningData.Data
         if(returningData.MessageCode == MessageCode.Ok && issueReceived != null){
-            return ResponseEntity.ok(IssueOM(issueReceived.number, issueReceived.name, issueReceived.short_desc, issueReceived.creationDate, issueReceived.closeDate, issue.stateID, issue.projectID))
+            return ResponseEntity.ok(issueReceived)
         }
         return ResponseEntity.status(500).body("Couldn't create the project") //todo change error message
     }
@@ -34,8 +34,7 @@ class IssuesController {
     fun getAllIssues(@PathVariable project_id: Int): ResponseEntity<Collection<IssueOM>> {
         val returningData = issuesCore!!.getProjectIssues(project_id)
         if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null) {
-            val issuesOM = returningData.Data!!.map { issue -> IssueOM(issue.number, issue.name, issue.short_desc, issue.creationDate, issue.closeDate, issue.stateID, issue.projectID) }
-            return ResponseEntity.ok(issuesOM)
+            return ResponseEntity.ok(returningData.Data!!)
         }
         return ResponseEntity.notFound().build<Collection<IssueOM>>()
     }

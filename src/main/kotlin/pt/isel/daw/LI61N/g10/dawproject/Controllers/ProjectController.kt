@@ -21,7 +21,7 @@ class ProjectController {
         var returningData = projectsCore!!.createProject(project)
         var project_received = returningData.Data
         if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){
-            return ResponseEntity.ok(ProjectOM(project_received!!.id, project_received!!.name, project_received!!.short_desc))
+            return ResponseEntity.ok(project_received!!)
         }
         return ResponseEntity.status(500).body("Couldn't create the project") //todo change error message
     }
@@ -31,8 +31,7 @@ class ProjectController {
     fun getAllProjects(): ResponseEntity<Collection<ProjectOM>> {
         val returningData = projectsCore!!.getProjects()
         if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){
-            val projectsOM = returningData.Data!!.map {prj->ProjectOM(prj.id, prj.name, prj.short_desc)}
-            return ResponseEntity.ok(projectsOM)
+            return ResponseEntity.ok(returningData.Data!!)
         }
         return ResponseEntity.notFound().build<Collection<ProjectOM>>()
     }
