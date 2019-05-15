@@ -1,12 +1,13 @@
 package pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts
 
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.AuthIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelsIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelsOM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.LabelOM
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface ILabelsCore {
-    fun ChangeLabels(projectID :Int, labelsIM :LabelsIM) : ReturningData<Collection<LabelsOM>>
+    fun getLabels(projectID :Int): ReturningData<Collection<LabelOM>>
 
-    fun GetLabels(projectID :Int): ReturningData<Collection<LabelsOM>>
+    fun createLabel(proj :LabelIM) : ReturningData<LabelOM>
+
+    fun deleteLabel(label_id: Int) : ReturningData<LabelOM>
 }

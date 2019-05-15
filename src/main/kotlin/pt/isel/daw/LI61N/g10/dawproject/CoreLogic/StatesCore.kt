@@ -16,35 +16,34 @@ class StatesCore :IStatesCore {
     @Autowired
     private val stateRepository: IProjectStatesDataAccess? = null
 
-    override fun ChangeProjectStates(states: Collection<StateIM>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun changeProjectStates(project_id: Int, states: Collection<String>) : ReturningData<Collection<StateOM>> {
+        var statesToRet = stateRepository!!.createProjectStates(project_id, states.map {state-> State(1, state, project_id) })
 
-        stateRepository!!.createProjectStates(states.map {state-> State(state.id, state.name, state.projectID) })
+        if(statesToRet != null){
+            return ReturningData<Collection<StateOM>>(MessageCode.Ok, statesToRet.map { state -> StateOM(state.id, state.name, state.project_id) })
+        }
+        return ReturningData<Collection<StateOM>>(MessageCode.GenericError, null)
     }
 
-    override fun getProjectStates(project_id: Int): ReturningData<Collection<StateOM>>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
-
+    override fun getProjectStates(project_id: Int): ReturningData<Collection<StateOM>> {
         var states = stateRepository!!.getProjectStates(project_id)
 
-        if (states == null  || states.isEmpty() == true)
-        {
-            var returnResult = ReturningData<Collection<StateOM>>(MessageCode.GenericError, null )
-            return returnResult
+        if(states != null){
+            //filling the Output model
+            var statesOM = mutableListOf<StateOM>()
+            states.forEach{
+                statesOM.add(StateOM(it.id,it.name, it.project_id ))
+            }
+            return ReturningData<Collection<StateOM>>(MessageCode.Ok, statesOM)
         }
-
-        //filling the Output model
-        var statesOM = mutableListOf<StateOM>()
-        states.forEach{
-            statesOM.add(StateOM(it.id,it.name, it.project_id ))
-        }
-
-        return ReturningData<Collection<StateOM>>(MessageCode.Ok, statesOM)
+        return ReturningData<Collection<StateOM>>(MessageCode.GenericError, null )
     }
 
-    override fun deleteProjectStates(project_id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        stateRepository!!.deleteProjectStates(project_id)
+    override fun deleteProjectStates(project_id: Int) : ReturningData<StateOM>{
+        var deleted = stateRepository!!.deleteProjectStates(project_id)
+        if(deleted > 0){
+            return ReturningData<StateOM>(MessageCode.Ok, null )
+        }
+        return ReturningData<StateOM>(MessageCode.GenericError, null)
     }
 }

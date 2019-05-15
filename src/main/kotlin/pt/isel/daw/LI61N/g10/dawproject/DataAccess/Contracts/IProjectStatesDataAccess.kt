@@ -6,7 +6,7 @@ public interface IProjectStatesDataAccess {
 
     fun getProjectStates(id: Int?): Collection<State>?
 
-    fun deleteProjectStates(id: Int?)
+    fun deleteProjectStates(id: Int?) : Int
 
-    fun createProjectStates(states: Collection<State>)
+    fun createProjectStates(project_id: Int, states: Collection<State>): Collection<State>?
 }

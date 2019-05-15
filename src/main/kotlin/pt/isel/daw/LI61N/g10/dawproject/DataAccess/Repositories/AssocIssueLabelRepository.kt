@@ -38,11 +38,11 @@ class AssocIssueLabelRepository: IAssocIssueLabelDataAccess {
         }
     }
 
-    override fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel) {
+    override fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel) : Int {
         val paramSource = MapSqlParameterSource()
                 .addValue("label_id", assocIssueLabel.label_id)
                 .addValue("issue_number", assocIssueLabel.issue_number)
 
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 }

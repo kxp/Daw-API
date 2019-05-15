@@ -16,6 +16,11 @@ Maven: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.htm
 Next changes: 
 * Add id and date to Comments;
 * When calling post project, we need to add something to add user_id using the get user in the authorization. That way ProjectIM doesnt need a user_id.
+* Allow to change issue.
+* When editing or creating a resource, we should return in the response body a representation of that created resource.
+* Make every method in core return OM objects, not the normal model classes. See ProjectCore.
+* Need to be: get projects by user id
+* Change DB table Comments to accept a creation_date collumn
 
 
 Tested:

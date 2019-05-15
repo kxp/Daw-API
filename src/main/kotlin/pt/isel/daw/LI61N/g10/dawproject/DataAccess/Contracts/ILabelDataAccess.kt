@@ -4,9 +4,11 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Label
 
 public interface ILabelDataAccess {
 
-    fun getLabels(): Collection<Label>?
+    fun getLabelsByProjectID(): Collection<Label>?
 
-    fun deleteLabel(id: Int?)
+    fun getLabelsByProjectID(projectID: Int): Collection<Label>?
 
-    fun createLabel(label: Label?): Int
+    fun deleteLabel(id: Int?): Int
+
+    fun createLabel(label: Label?): Label?
 }

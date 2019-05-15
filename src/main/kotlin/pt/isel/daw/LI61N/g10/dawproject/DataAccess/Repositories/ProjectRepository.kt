@@ -15,7 +15,9 @@ class ProjectRepository: IProjectDataAccess {
 
     private val SQL_FIND_BY_ID = "SELECT * FROM [dbo].[Projects] WHERE ID = :id"
     private val SQL_FIND_ALL = "SELECT * FROM [dbo].[Projects]"
-    private val SQL_INSERT = "INSERT INTO [dbo].[Projects] ([name], [short_desc], [user_id]) values(:name, :short_desc, :user_id)"
+    private val SQL_INSERT = "INSERT INTO [dbo].[Projects] ([name], [short_desc], [user_id]) " +
+            "values(:name, :short_desc, :user_id); " +
+            "select * from [dbo].[Projects] where [id] = (SELECT SCOPE_IDENTITY())"
     private val SQL_DELETE_BY_ID = "DELETE FROM [dbo].[Projects] WHERE [id] = :id"
 
     private val ROW_MAPPER = ProjectRM()
@@ -32,21 +34,22 @@ class ProjectRepository: IProjectDataAccess {
         }
     }
 
-    override fun createProject(project: Project): Int {
+    override fun createProject(project: Project): Project? {
         val paramSource = MapSqlParameterSource()
                 .addValue("name", project.name)
                 .addValue("short_desc", project.short_desc)
                 .addValue("user_id", 1)
 
-        return jdbcTemplate!!.update(SQL_INSERT, paramSource)
+        return jdbcTemplate!!.queryForObject(SQL_INSERT, paramSource, ROW_MAPPER)
+        //return jdbcTemplate!!.update(SQL_INSERT, paramSource)
     }
 
     override fun getProjects(): Collection<Project> {
         return jdbcTemplate!!.query(SQL_FIND_ALL, ROW_MAPPER)
     }
 
-    override fun deleteProject(id: Int?) {
+    override fun deleteProject(id: Int?): Int{
         val paramSource = MapSqlParameterSource("id", id)
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 }

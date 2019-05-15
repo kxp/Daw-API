@@ -7,9 +7,9 @@ interface IUserDataAccess {
 
     fun getUser(user_id: Int?): User?
 
-    fun createUser(user: User): Int
+    fun createUser(user: User): User?
 
-    fun deleteUser(id: Int?)
+    fun deleteUser(id: Int?): Int
 
     fun getUser(username: String): User?
 }

@@ -6,9 +6,9 @@ interface ICommentDataAccess {
 
     fun updateComment(comment: Comment): Int
 
-    fun createComment(comment: Comment): Int
+    fun createComment(comment: Comment): Comment?
 
-    fun getComments(): Collection<Comment>
+    fun getCommentsByIssueID(issueID: Int): Collection<Comment>
 
-    fun deleteComment(id: Int?)
+    fun deleteComment(id: Int?): Int
 }

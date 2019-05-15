@@ -32,20 +32,28 @@ class StateRepository: IProjectStatesDataAccess {
         }
     }
 
-    override fun deleteProjectStates(id: Int?) {
+    override fun deleteProjectStates(id: Int?) : Int {
         val paramSource = MapSqlParameterSource("project_id", id)
-        jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
+        return jdbcTemplate!!.update(SQL_DELETE_BY_ID, paramSource)
     }
 
-    override fun createProjectStates(states: Collection<State>) {
-        var states_list = states.toList();
-        val arrayParamSource = Array<MapSqlParameterSource>((states as Collection<MapSqlParameterSource>).size, { position ->
-            MapSqlParameterSource()
-                    .addValue("name", states_list.elementAt(position).name)
-                    .addValue("project_id", states_list.elementAt(position).project_id) })
+    override fun createProjectStates(project_id :Int, states: Collection<State>) : Collection<State>?{
+        if(states != null && states.isNotEmpty())
+        {
+            var states_list = states.toList();
+            val arrayParamSource = Array<MapSqlParameterSource>((states as Collection<MapSqlParameterSource>).size, { position ->
+                MapSqlParameterSource()
+                        .addValue("name", states_list.elementAt(position).name)
+                        .addValue("project_id", states_list.elementAt(position).project_id) })
 
-        jdbcTemplate!!.batchUpdate(SQL_INSERT, arrayParamSource as Array<MapSqlParameterSource>)
+            jdbcTemplate!!.batchUpdate(SQL_INSERT, arrayParamSource as Array<MapSqlParameterSource>)
 
-
+            return getProjectStates(project_id)
+        }
+        else { //if whe receive an empty list
+            deleteProjectStates(project_id)
+            return listOf<String>() as Collection<State>
+        }
+        return null
     }
 }
