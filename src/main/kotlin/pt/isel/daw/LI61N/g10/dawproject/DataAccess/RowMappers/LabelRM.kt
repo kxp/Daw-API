@@ -11,6 +11,7 @@ class LabelRM: RowMapper<Label> {
     override fun mapRow(rs: ResultSet, rowNum: Int): Label {
         val label = Label(
                 rs.getInt("id"),
+                rs.getInt("project_id"),
                 rs.getString("name")
         )
         return label
