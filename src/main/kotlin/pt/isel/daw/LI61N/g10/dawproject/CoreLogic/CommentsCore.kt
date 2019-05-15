@@ -2,11 +2,15 @@ package pt.isel.daw.LI61N.g10.dawproject.CoreLogic
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentsIM
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentsOM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentIM
+import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.CommentOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.ICommentsCore
 import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Contracts.ICommentDataAccess
+import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Comment
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
+import pt.isel.daw.LI61N.g10.dawproject.Helpers.TimeConverter
+import java.time.LocalDateTime
 
 @Service
 class CommentsCore :ICommentsCore{
@@ -14,53 +18,45 @@ class CommentsCore :ICommentsCore{
     @Autowired
     private val commentsRepository: ICommentDataAccess? = null
 
+    override fun createComment(issueID: Int, comment: CommentIM): ReturningData<CommentOM> {
+        var addedComment= commentsRepository!!.createComment(Comment(
+                comment.id,
+                comment.text,
+                comment.issueID,
+                TimeConverter.convertToDateViaInstant(LocalDateTime.now())
+        ))
 
+        if (addedComment != null && comment.issueID == issueID){
+            return  ReturningData<CommentOM>(MessageCode.Ok, convertCommentToCommentOM(addedComment))
+        }
 
-    override fun CreateComment(comment: CommentsIM): ReturningData<CommentsOM> {
-
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return  ReturningData<CommentOM>(MessageCode.GenericError, null )
     }
 
-    override fun ChangeComment(comment: CommentsIM): ReturningData<CommentsOM> {
-
-
-        //get current info to iupdate only the changes
-        //commentsRepository!!.
-
-        //commentsRepository!!.updateComment(comment)
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun deleteComment(commentID: Int): ReturningData<CommentOM> {
+        var deleted = commentsRepository!!.deleteComment(commentID)
+        if(deleted > 0){
+            return ReturningData<CommentOM>(MessageCode.Ok, null )
+        }
+        return ReturningData<CommentOM>(MessageCode.ProjectNotFound, null)
     }
 
-    override fun DeleteComment(project: Int, issueID : Int, commentID :Int): ReturningData<CommentsOM> {
+    override fun getComments(issueID: Int): ReturningData<Collection<CommentOM>> {
+        var comments = commentsRepository!!.getCommentsByIssueID(issueID)
 
-        //commentsRepository.deleteComment(id)
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun GetComments(id:Int): ReturningData<Collection<CommentsOM>> {
-
-
-/*
-        var comments = commentsRepository!!.getComments(id)
-
-        if (comments == null  || comments.isEmpty()== true)
+        if(comments != null)
         {
-            var returnResult = ReturningData<Collection<CommentsOM>>(MessageCode.GenericError, null )
-            return returnResult
+            //filling the Output model
+            var commentsList = mutableListOf<CommentOM>()
+            comments.forEach{
+                commentsList.add(convertCommentToCommentOM(it))
+            }
+            return ReturningData<Collection<CommentOM>>(MessageCode.Ok, commentsList)
         }
-
-        //filling the Output model
-        var commentsList = mutableListOf<CommentsOM>()
-        comments.forEach{
-            commentsList.add(CommentsOM(it.id ,it.short_text , it.issue_id ))
-        }
-
-        var returnResult = ReturningData<Collection<CommentsOM>>(MessageCode.Ok, commentsList)
-        return returnResult*/
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return ReturningData<Collection<CommentOM>>(MessageCode.GenericError, null )
     }
 
+    fun convertCommentToCommentOM(comment: Comment): CommentOM{
+        return CommentOM(comment.id, comment.short_text, comment.issue_id, comment.creationDate)
+    }
 }

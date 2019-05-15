@@ -20,6 +20,7 @@ Next changes:
 * When editing or creating a resource, we should return in the response body a representation of that created resource.
 * Make every method in core return OM objects, not the normal model classes. See ProjectCore.
 * Need to be: get projects by user id
+* Change DB table Comments to accept a creation_date collumn
 
 
 Tested:

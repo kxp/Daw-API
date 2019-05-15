@@ -16,7 +16,7 @@ class StatesCore :IStatesCore {
     @Autowired
     private val stateRepository: IProjectStatesDataAccess? = null
 
-    override fun ChangeProjectStates(project_id: Int, states: Collection<String>) : ReturningData<Collection<StateOM>> {
+    override fun changeProjectStates(project_id: Int, states: Collection<String>) : ReturningData<Collection<StateOM>> {
         var statesToRet = stateRepository!!.createProjectStates(project_id, states.map {state-> State(1, state, project_id) })
 
         if(statesToRet != null){

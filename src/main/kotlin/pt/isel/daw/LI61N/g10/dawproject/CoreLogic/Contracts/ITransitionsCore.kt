@@ -5,7 +5,7 @@ import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.Transitio
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.ReturningData
 
 interface ITransitionsCore {
-    //fun CreateTransition(proj : TransitionIM) : ReturningData<TransitionOM>
+    //fun createTransition(proj : TransitionIM) : ReturningData<TransitionOM>
 
     fun changeTransitions(project_id: Int, transitions: Collection<TransitionIM>) : ReturningData<Collection<TransitionOM>>
 

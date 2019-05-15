@@ -3,7 +3,6 @@ package pt.isel.daw.LI61N.g10.dawproject.Controllers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StateIM
 import pt.isel.daw.LI61N.g10.dawproject.Controllers.Models.InputModels.StateOM
 import pt.isel.daw.LI61N.g10.dawproject.CoreLogic.Contracts.IStatesCore
 import pt.isel.daw.LI61N.g10.dawproject.Helpers.MessageCode
@@ -18,7 +17,7 @@ class StatesController {
     @PutMapping
     @ResponseBody
     fun updateStates(@PathVariable project_id: Int, @RequestBody states: List<String>) : ResponseEntity<Any> {
-        var returningData = coreState!!.ChangeProjectStates(project_id, states)
+        var returningData = coreState!!.changeProjectStates(project_id, states)
 
         var statesReceived = returningData.Data
         if(returningData.MessageCode == MessageCode.Ok && returningData.Data != null){

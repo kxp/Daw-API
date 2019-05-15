@@ -52,15 +52,11 @@ class IssuesCore : IIssuesCore {
     }
 
     override fun deleteIssue(projectID: Int, id: Int) : ReturningData<IssueOM> {
-
-        var requestedIssue = issueRepository!!.getProjectIssue(id)
-
-        if (requestedIssue == null ){
-            return  ReturningData<IssueOM>(MessageCode.IssueNotFound, null )
+        var deleted = issueRepository!!.deleteIssue(id)
+        if(deleted > 0){
+            return ReturningData<IssueOM>(MessageCode.Ok, null )
         }
-
-       issueRepository!!.deleteIssue(id)
-        return  ReturningData<IssueOM>(MessageCode.Ok, null )
+        return ReturningData<IssueOM>(MessageCode.ProjectNotFound, null)
     }
 
     override fun getProjectIssue(project_id: Int, issue_number: Int): ReturningData<IssueOM> {
