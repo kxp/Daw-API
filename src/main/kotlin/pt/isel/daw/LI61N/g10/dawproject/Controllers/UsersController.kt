@@ -33,7 +33,7 @@ class UsersController {
     }
 
     @DeleteMapping("/{user_id}/")
-    fun deleteIssue(@PathVariable user_id: Int) : ResponseEntity<Any>{
+    fun deleteUser(@PathVariable user_id: Int) : ResponseEntity<Any>{
         val messageCode = usersCore!!.deleteUser(user_id).MessageCode
         if(messageCode == MessageCode.Ok)
         {

@@ -4,9 +4,9 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.Transition
 
 interface ITransitionDataAccess {
 
-    fun createTransition(transition: Transition): Int
+    fun getProjectTransitions(project_id: Int?): Collection<Transition>?
 
-    fun getProjectStateTransitions(project_id: Int?): Collection<Transition>?
+    fun deleteProjectTransitions(project_id: Int): Int
 
-    fun deleteTransition(transition: Transition): Int
+    fun createProjectTransitions(project_id: Int, transitions: Collection<Transition>): Collection<Transition>?
 }
