@@ -4,9 +4,9 @@ import pt.isel.daw.LI61N.g10.dawproject.DataAccess.Models.AssocIssueLabel
 
 interface IAssocIssueLabelDataAccess {
 
-    fun AddLabelToIssue(assocIssueLabel: AssocIssueLabel): Int
+    fun createAssocIssueLabel(assocIssueLabel: AssocIssueLabel): AssocIssueLabel?
 
-    fun getIssueLabels(issue_number: Int?): Collection<AssocIssueLabel>?
+    fun getAllAssocIssueLabelByIssueID(issue_number: Int): Collection<AssocIssueLabel>?
 
-    fun deleteIssueLabel(assocIssueLabel: AssocIssueLabel): Int
+    fun deleteAssocIssueLabel(label_id: Int, issue_number: Int): Int
 }

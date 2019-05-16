@@ -21,6 +21,7 @@ Next changes:
 * Make every method in core return OM objects, not the normal model classes. See ProjectCore.
 * Need to be: get projects by user id
 * Change DB table Comments to accept a creation_date collumn
+* Path in AssocIssueLabelController may be wrong
 
 
 Tested:

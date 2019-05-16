@@ -25,12 +25,13 @@ class UsersController {
         return ResponseEntity.notFound().build()
     }
 
+    /*
     @PostMapping
     @ResponseBody
     fun login(@RequestBody user: UserIM): ResponseEntity<Any> {
         //Todo do login
         return ResponseEntity.status(500).body("Couldn't create the project")
-    }
+    }*/
 
     @DeleteMapping("/{user_id}/")
     fun deleteUser(@PathVariable user_id: Int) : ResponseEntity<Any>{

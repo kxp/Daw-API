@@ -48,7 +48,7 @@ class TransitionCore : ITransitionsCore {
         return ReturningData<Collection<TransitionOM>>(MessageCode.GenericError, null )
     }
 
-    fun convertFromTransitionToTransitionOM(transition : Transition) : TransitionOM {
+    private fun convertFromTransitionToTransitionOM(transition : Transition) : TransitionOM {
         return TransitionOM(transition.project_id, transition.initial_state_id, transition.target_state_id)
     }
 }
