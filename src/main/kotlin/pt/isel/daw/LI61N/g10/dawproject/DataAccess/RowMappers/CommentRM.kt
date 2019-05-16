@@ -12,7 +12,8 @@ class CommentRM: RowMapper<Comment> {
         val comment = Comment(
                 rs.getInt("id"),
                 rs.getString("short_text"),
-                rs.getInt("issue_id")
+                rs.getInt("issue_id"),
+                rs.getDate("creationDate")
         )
         return comment
     }

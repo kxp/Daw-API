@@ -87,7 +87,7 @@ class IssuesCore : IIssuesCore {
         return ReturningData<Collection<IssueOM>>(MessageCode.GenericError, null )
     }
 
-    fun convertIssueToIssueOM(issue: Issue) : IssueOM
+    private fun convertIssueToIssueOM(issue: Issue) : IssueOM
     {
         return IssueOM(issue.state_id ,issue.name , issue.short_desc, issue.creation_date, issue.close_date, issue.state_id, issue.project_id )
     }
