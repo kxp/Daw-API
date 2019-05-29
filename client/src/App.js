@@ -5,6 +5,8 @@ import Login from './components/Login'
 import Admin from './components/Admin'
 import Logout from './components/Logout'
 import Projects from './components/Projects';
+import Issues from './components/Issues';
+import Issue from './components/Issue';
 
 
 
@@ -17,25 +19,33 @@ function App() {
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/b" component={B} />
-      <Route path="/projects" component={Projects} />
+      <Route exact path="/project/:id" component={A} />
+      <Route exact path="/project" component={Projects} />
+      <Route exact path="/project/:id/issues" component={Issues} />
+      <Route exact path="/project/:id/issues/:issues_id" component={Issue} />
     </Switch>
   );
 }
 
 
 
-const A = () => {
+const A = ({match}) => {
   return (
     <div>
-      <h1> This is component A page</h1>
-      <Link to="/b"> B component</Link>
+      <h1>Hello project: {match.params.id}</h1>
+      <Link to={"/project/"+match.params.id+"/issues"}><h1>Click to view the issues of projectid: {match.params.id}</h1></Link>
     </div>
   )
 }
 
+
+
+
+
 const B = () => {
     return (
       <div className="App">
+      <Projects>321321</Projects>
       Hello!
         </div>
     );
