@@ -56,7 +56,7 @@ class CommentsCore :ICommentsCore{
         return ReturningData<Collection<CommentOM>>(MessageCode.GenericError, null )
     }
 
-    fun convertCommentToCommentOM(comment: Comment): CommentOM{
+    private fun convertCommentToCommentOM(comment: Comment): CommentOM{
         return CommentOM(comment.id, comment.short_text, comment.issue_id, comment.creationDate)
     }
 }

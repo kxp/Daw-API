@@ -51,7 +51,7 @@ class LabelCore : ILabelsCore {
         return ReturningData<LabelOM>(MessageCode.ProjectNotFound, null)
     }
 
-    fun convertFromLabelToLabelOM(label : Label) : LabelOM {
+    private fun convertFromLabelToLabelOM(label : Label) : LabelOM {
         return LabelOM(label.id, label.projectID, label.name)
     }
 }

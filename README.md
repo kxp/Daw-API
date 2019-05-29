@@ -21,14 +21,20 @@ Next changes:
 * Make every method in core return OM objects, not the normal model classes. See ProjectCore.
 * Need to be: get projects by user id
 * Change DB table Comments to accept a creation_date collumn
+* Path in AssocIssueLabelController may be wrong
 
 
 Tested:
 - Projects:
-  * All
+  * Get all 
+  * Post
+  * Delete
+  * Get single
   
 - States:
-  * To be tested 
+  * Put : but when sended a list the list didnt replace the previous one, need to check on phase 2 
+  * Delete all 
+  * get all project states 
 - Issues:
   * Not working
 

@@ -10,6 +10,6 @@ EXPOSE 8080
 
 
 #mvn package
-#docker build -t kxpto/daw-api:v0.1.0 .
-#docker push kxpto/daw-api:v0.1.0 
-#docker run -it --restart unless-stopped -p 8080:8080 kxpto/daw-api:v0.1.0
+#docker build -t kxpto/daw-api:latest .
+#docker push kxpto/daw-api:latest
+#docker pull  kxpto/daw-api:latest && docker run  --name daw-api -d --restart unless-stopped -p 8080:8080 kxpto/daw-api:latest
