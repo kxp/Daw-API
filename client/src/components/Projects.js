@@ -21,15 +21,43 @@ export default class Projects extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/posts/1/comments',{
-      method: 'GET',
-      header: {
-          'Content-Type': 'application/json',
-          'Authorization': 'dXNlcg==',        
-      },
-    })
-      .then(response => response.json())
+  
+componentDidMount() {
+
+  const responseObj = fetch('http://localhost:8080/v1/projects/', { 
+    method: 'GET', 
+    header: new Headers({
+      'Authorization': 'dXNlcg==',
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+      'Content-Type': 'application/json',
+    }), 
+  });
+
+   //const request = {
+   // headers: {'X-Custom-Header': 'foobar'}
+
+     //method: "GET",
+     //headers: { 
+      //"Authorization": "dXNlcg==",
+      //"Content-Type": "application/json",
+      //"Access-Control-Allow-Origin":"*",  
+      //"Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS"}
+    //};
+
+  //  const responseObj = fetch('http://localhost:8080/v1/projects/', obj)
+  //        .then(function(response){
+  //            //Do something with response
+  //            console.log(response);
+  //        });
+    //   fetch('http://51.75.163.237:8080/v1/projects/',{
+    //     method: 'GET',
+    //     header: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': 'dXNlcg==',     
+    //   },
+    // })
+      responseObj.then(response => response.json())
       .then(
         (json) => {
         console.log(json)
@@ -84,7 +112,8 @@ export default class Projects extends Component {
 
 
   render() {
-    const { error, isLoaded, items, userId, title, body, projects } = this.state;
+    const { error, isLoaded, items, userId, title, body, projects,json } = this.state;
+    console.log(json," HERE")
     if (error) {
       return <div>Error: {error.message}</div>;
     }
@@ -96,9 +125,10 @@ export default class Projects extends Component {
         /* Hand coded projects test */
         <div>
           <ul>
+            Projects: 
               {projects.map((project, i) => 
                  <li key={i}>
-                  <Link to={"/project/"+i}>
+                  <Link to={"/projects/"+i}>
                   {project}
                   
                   </Link>

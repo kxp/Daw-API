@@ -19,10 +19,10 @@ function App() {
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/b" component={B} />
-      <Route exact path="/project/:id" component={A} />
-      <Route exact path="/project" component={Projects} />
-      <Route exact path="/project/:id/issues" component={Issues} />
-      <Route exact path="/project/:id/issues/:issues_id" component={Issue} />
+      <Route exact path="/projects/:id" component={A} />
+      <Route exact path="/projects" component={Projects} />
+      <Route exact path="/projects/:id/issues" component={Issues} />
+      <Route exact path="/projects/:id/issues/:issues_id" component={Issue} />
     </Switch>
   );
 }
@@ -33,7 +33,7 @@ const A = ({match}) => {
   return (
     <div>
       <h1>Hello project: {match.params.id}</h1>
-      <Link to={"/project/"+match.params.id+"/issues"}><h1>Click to view the issues of projectid: {match.params.id}</h1></Link>
+      <Link to={"/projects/"+match.params.id+"/issues"}><h1>Click to view the issues of projectid: {match.params.id}</h1></Link>
     </div>
   )
 }

@@ -48,7 +48,7 @@ export default class Issues extends Component {
         <ul>
               {issues.map((project, i) => 
                  <li key={i}>
-                  <Link to={"/project/"+ this.state.projectid +"/issues/" + i}>{project}</Link>
+                  <Link to={"/projects/"+ this.state.projectid +"/issues/" + i}>{project}</Link>
                   <button onClick={ () => this.deleteIssue(i)} >Delete</button>
                 </li>
                )}
