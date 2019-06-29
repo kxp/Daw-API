@@ -23,6 +23,8 @@ export default class Admin extends Component {
       <div>
         <h1>Administrator acces, Home page!</h1>
         <Link to="/logout">Logout</Link>
+        <br></br>
+        <Link to="/projects">Click to view the projects</Link>
       </div>
     )
   }
